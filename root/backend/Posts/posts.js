@@ -2,64 +2,109 @@ const express = require('express');
 const uuid = require('uuid');
 const router = express.Router();
 
-// posts database cluster from mongodb
-const User = require("../db/userSchema");
+// Dummy database 
+// DONE : Use MongoDB 
+// const posts = [
+//     {
+//         "id": 1,
+//         "author": "ashish",
+//         "email": "xyz@z.com",
+//         "text": "something"
+//     },
+//     {
+//         "id": 2,
+//         "author": "kumar",
+//         "email": "abc@z.com",
+//         "text": "something1"
+//     }
+// ];
+
+// Mongodb database
+const posts = require('../db/postSchema');
 
 
 // Get Posts
-router.get('/', (req, res) => res.json(posts));
+router.get('/', async (req, res) => {
+    posts.find({}, (err, items) => {
+        if (err) throw err;
+        res.json(items);
+    })
+});
 
 // Get single Post
-router.get('/:id', (req, res) => {
-    const found = posts.some(member => member.id === parseInt(req.params.id));
-    if(found) {
-        res.json(posts.filter(member => member.id === parseInt(req.params.id)));
+router.get('/:id', async (req, res) => {
+    const found = await posts.count({
+        id: req.params.id
+    },
+        {
+            limit: 1
+        });
+    if (found) {
+        const foundPost = await posts.findOne({ id: req.params.id });
+        res.status(200).json(foundPost);
     } else {
-        res.status(400).json({message: `No member with id ${req.params.id}`});
+        res.status(404).send("Post not Found!");
     }
 });
 
 // Create a post
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const newMember = {
         id: uuid.v4(),
         author: req.body.author,
         email: req.body.email,
-        text: reqq.body.text
+        text: req.body.text
     };
     if(!newMember.author || !newMember.email) {
         return res.status(400).json({mssg: 'Please include a author and a email.'});
     }
-    posts.push(newMember);
+    await posts.create(newMember, err => {
+        if (err) throw err;
+    });
     //res.json(posts);
     res.redirect('/');
 });
 
 // Update a post
-router.put('/:id', (req, res) => {
-    const found = posts.some(member => member.id === parseInt(req.params.id));
-    if(found) {
-        const updatedMember = req.body;
-        posts.forEach(member => {
-            if(member.id === parseInt(req.params.id)) {
-                member.author = updatedMember.author ? updatedMember.author: member.author;
-                member.email = updatedMember.email ? updatedMember.email: member.email;
+router.put('/:id', async (req, res) => {
+    const found = await posts.count({
+        id: req.params.id
+    }, {
+        limit: 1
+    });
+    if (found) {
+        await posts.updateOne({
+                    id: req.params.id
+                },
+            {
+            $set: {
+                    email: req.params.email,
+                    author: req.params.author,
+                    text: req.params.text
+                },
+                $currentDate: {
+                    lastModified: true
+                }
+        }
+        )
 
-                res.json({mssg:'Member updated', member})
-            }
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
         });
     } else {
-        res.status(400).json({message: `No member with id ${req.params.id}`});
+        res.status(404).send("Post not Found!");
     }
 });
 
 // Delete a post
-router.delete('/:id', (req, res) => {
-    const found = posts.some(member => member.id === parseInt(req.params.id));
-    if(found) {
-        res.json({mssg: "Member deleted", posts: posts.filter(member => member.id !== parseInt(req.params.id))});
-    } else {
-        res.status(400).json({message: `No member with id ${req.params.id}`});
+router.delete('/:id', async (req, res) => {
+    try {
+        await posts.delete({ id: req.params.id });
+    } catch (e) {
+        res.writeHead(400, {
+            'Content-Type': 'application/json'
+        });
+        res.send(`No member with ${req.params.id} found!`);
     }
 });
 

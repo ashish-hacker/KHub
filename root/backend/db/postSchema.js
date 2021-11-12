@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        unique: true
+    },
     author: {
         type: String,
         default: null
@@ -12,10 +16,7 @@ const userSchema = new mongoose.Schema({
     text: {
         type: String,
         default: ""
-    },
-    token: {
-        type: String
-    },
+    }
 });
 
-module.exports = mongoose.model("posts", userSchema);
+module.exports = mongoose.model("posts", postSchema);
