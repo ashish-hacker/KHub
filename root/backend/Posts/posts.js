@@ -1,25 +1,15 @@
 const express = require('express');
 const uuid = require('uuid');
 const router = express.Router();
-const posts = [
-    {
-        "id": 1,
-        "author": "ashish",
-        "email": "xyz@z.com",
-        "text": "something"
-    },
-    {
-        "id": 2,
-        "author": "kumar",
-        "email": "abc@z.com",
-        "text": "something1"
-    }
-];
 
-// get memebers
+// posts database cluster from mongodb
+const User = require("../db/userSchema");
+
+
+// Get Posts
 router.get('/', (req, res) => res.json(posts));
 
-// Get single member
+// Get single Post
 router.get('/:id', (req, res) => {
     const found = posts.some(member => member.id === parseInt(req.params.id));
     if(found) {
@@ -29,13 +19,13 @@ router.get('/:id', (req, res) => {
     }
 });
 
-// Create a member
+// Create a post
 router.post('/', (req, res) => {
     const newMember = {
         id: uuid.v4(),
         author: req.body.author,
         email: req.body.email,
-        status: 'active'
+        text: reqq.body.text
     };
     if(!newMember.author || !newMember.email) {
         return res.status(400).json({mssg: 'Please include a author and a email.'});
@@ -45,7 +35,7 @@ router.post('/', (req, res) => {
     res.redirect('/');
 });
 
-// Update posts
+// Update a post
 router.put('/:id', (req, res) => {
     const found = posts.some(member => member.id === parseInt(req.params.id));
     if(found) {
@@ -63,7 +53,7 @@ router.put('/:id', (req, res) => {
     }
 });
 
-// Delete member
+// Delete a post
 router.delete('/:id', (req, res) => {
     const found = posts.some(member => member.id === parseInt(req.params.id));
     if(found) {
