@@ -1,75 +1,109 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Show from "../Show";
-import Welcome from "../authPage/Welcome"
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+import React from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import {
+	Routes,
+	Route
+} from "react-router-dom";
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          {value === 0 && <Welcome />}
-          {value === 2 && <Show />}
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
+const AntTabs = withStyles({
+	root: {
+		borderBottom: '1px solid #e8e8e8',
+	},
+	indicator: {
+		backgroundColor: '#a46bcf',
+	}
+})(Tabs);
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+const AntTab = withStyles((theme) => ({
+	root: {
+		textTransform: 'none',
+		minWidth: 72,
+		color: '#000000',
+		display: 'flex',
+		fontWeight: theme.typography.fontWeightRegular,
+		marginRight: theme.spacing(4),
+		fontFamily: [
+			'-apple-system',
+			'BlinkMacSystemFont',
+			'"Segoe UI"',
+			'Roboto',
+			'"Helvetica Neue"',
+			'Arial',
+			'sans-serif',
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"',
+		].join(','),
+		'&:hover': {
+			color: '#a46bcf',
+			opacity: 1,
+		},
+		'&$selected': {
+			color: '#a46bcf',
+			fontWeight: theme.typography.fontWeightMedium,
+		},
+		'&:focus': {
+			color: '#a46bcf',
+		},
+	},
+	selected: {},
+}))((props) => <Tab disableRipple {...props} />);
 
-export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
-  return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label="Home" {...a11yProps(0)} />
-          <Tab label="KHub" {...a11yProps(1)} />
-          <Tab label="Forum" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </Box>
-  );
+
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		flexGrow: 1,
+	},
+	padding: {
+		padding: theme.spacing(3),
+	},
+	demo1: {
+		backgroundColor: theme.palette.background.paper,
+	},
+	blank: {
+		marginRight: '70%'
+	}
+}));
+
+export default function CustomizedTabs(props) {
+	const classes = useStyles();
+	const [value, setValue] = React.useState(parseInt(props.id));
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+	const Nav = () => {
+		return (
+			<AntTabs value={value} onChange={handleChange} aria-label="ant example">
+				<AntTab href= '/' label="Home" />
+				<AntTab href='/hub' label="Hub" />
+				<AntTab href='/forum' label="Forum" className={classes.blank} />
+				<AntTab href='/welcome' label="Sign In" />
+			</AntTabs>
+				)
+	}
+	return (
+		<div className={classes.root}>
+			<div className={classes.demo1}>
+					<Routes>
+						<Route exact path='/' element={<Nav />} />
+						{/* <Route path='/hub' element={<AntTab label="Hub" /> } />
+						<Route path='/forum' element={<AntTab label="Forum" className={classes.blank} /> } />
+						<Route path='/signin' element={<AntTab label="Sign In" Icon={<AcUnitIcon />} /> } /> */}
+
+					</Routes>
+					{/* <AntTab label="Home" />
+					<AntTab label="Hub" />
+					<AntTab label="Forum" className={classes.blank} />
+					<AntTab label="Sign In" Icon={<AcUnitIcon />} /> */}
+				<Typography className={classes.padding} />
+			</div>
+			</div>
+	);
 }

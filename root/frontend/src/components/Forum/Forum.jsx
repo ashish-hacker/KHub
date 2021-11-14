@@ -2,7 +2,7 @@ import React, {
     useState,
     useEffect
 } from 'react'
-
+import CreatePost from './CreatePost'
 export default function Show() {
     const [user, setUser] = useState([]);
 
@@ -11,11 +11,12 @@ export default function Show() {
             if (res.ok) {
                 return res.json();
             }
-        }).then(jsonRes => setUser(jsonRes[0].text));
+        }).then(jsonRes => setUser(jsonRes[0].author));
     });
     return (
-      <div>
-        <h1>{user}</h1>
+      <div className="container">
+        <h1>{ user }</h1>
+        <CreatePost />
       </div>
     );
 }

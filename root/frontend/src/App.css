@@ -1,8 +1,10 @@
 .App {
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 nav {
 	display: flexbox;
 	justify-content: space-between;
 	align-items: stretch;
+	align-content: space-between;
 }
