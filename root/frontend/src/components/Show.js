@@ -11,7 +11,7 @@ export default function Show() {
             if (res.ok) {
                 return res.json();
             }
-        }).then(jsonRes => setUser(jsonRes[0].author));
+        }).then(jsonRes => setUser(jsonRes[0].text));
     });
     return (
       <div>

@@ -11,11 +11,15 @@ const postSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true
+        unique: false
     },
     text: {
         type: String,
         default: ""
+    },
+    comments: {
+        type: Array,
+        default: []
     }
 });
 

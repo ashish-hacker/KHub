@@ -1,15 +1,18 @@
 const bodyParser = require("body-parser");
 const path = require("path");
+const cors = require('cors');
 const express = require("express");
 require("dotenv").config({
     path: "./config.env"
 });
 require("./db/conn").connect();
 
+
 // Init app
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => res.send("hi"));
 
@@ -19,13 +22,13 @@ app.get('/', (req, res) => res.send("hi"));
 const auth = require("./Auth/auth");
 
 app.post("/welcome", auth, (req, res) => {
-    res.status(200).header('Content-Type: application/json');
+    res.status(200);
     res.send("Welcome 🙌 ");
 });
 app.use("/auth/register/student", require("./Auth/registerStudent"));
 app.use("/auth/register/admin", require("./Auth/registerAdmin"));
 app.use("/auth/login/student", require("./Auth/loginStudent"));
-app.use("/auth/login/admin", require("./Auth/loginAdmin"));
+app.use("/auth/login/admin",  require("./Auth/loginAdmin"));
 
 
 

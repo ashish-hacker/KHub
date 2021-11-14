@@ -29,6 +29,7 @@ router.get('/', async (req, res) => {
         if (err) throw err;
         res.json(items);
     })
+    
 });
 
 // Get single Post
@@ -45,6 +46,7 @@ router.get('/:id', async (req, res) => {
     } else {
         res.status(404).send("Post not Found!");
     }
+    
 });
 
 // Create a post
@@ -61,8 +63,10 @@ router.post('/', async (req, res) => {
     await posts.create(newMember, err => {
         if (err) throw err;
     });
+    
     //res.json(posts);
     res.redirect('/');
+    
 });
 
 // Update a post
@@ -88,12 +92,11 @@ router.put('/:id', async (req, res) => {
         }
         )
 
-        res.writeHead(200, {
-            'Content-Type': 'application/json'
-        });
+        res.status(200);
     } else {
         res.status(404).send("Post not Found!");
     }
+    
 });
 
 // Delete a post
@@ -101,9 +104,7 @@ router.delete('/:id', async (req, res) => {
     try {
         await posts.delete({ id: req.params.id });
     } catch (e) {
-        res.writeHead(400, {
-            'Content-Type': 'application/json'
-        });
+        res.status(400);
         res.send(`No member with ${req.params.id} found!`);
     }
 });
