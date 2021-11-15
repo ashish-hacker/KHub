@@ -1,109 +1,95 @@
-import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import {
-	Routes,
-	Route
-} from "react-router-dom";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
-
-const AntTabs = withStyles({
-	root: {
-		borderBottom: '1px solid #e8e8e8',
+const AntTabs = styled(Tabs)({
+	borderBottom: '1px solid #e8e8e8',
+	'& .MuiTabs-indicator': {
+		backgroundColor: '#1890ff',
 	},
-	indicator: {
-		backgroundColor: '#a46bcf',
-	}
-})(Tabs);
+	display: 'flex',
+	justifyContent: 'center',
+	
+});
 
-const AntTab = withStyles((theme) => ({
-	root: {
-		textTransform: 'none',
+const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+	textTransform: 'none',
+	minWidth: 0,
+	[theme.breakpoints.up('sm')]: {
 		minWidth: 72,
-		color: '#000000',
-		display: 'flex',
-		fontWeight: theme.typography.fontWeightRegular,
-		marginRight: theme.spacing(4),
-		fontFamily: [
-			'-apple-system',
-			'BlinkMacSystemFont',
-			'"Segoe UI"',
-			'Roboto',
-			'"Helvetica Neue"',
-			'Arial',
-			'sans-serif',
-			'"Apple Color Emoji"',
-			'"Segoe UI Emoji"',
-			'"Segoe UI Symbol"',
-		].join(','),
-		'&:hover': {
-			color: '#a46bcf',
-			opacity: 1,
-		},
-		'&$selected': {
-			color: '#a46bcf',
-			fontWeight: theme.typography.fontWeightMedium,
-		},
-		'&:focus': {
-			color: '#a46bcf',
-		},
 	},
-	selected: {},
-}))((props) => <Tab disableRipple {...props} />);
-
-
-
-
-
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
+	fontWeight: theme.typography.fontWeightRegular,
+	marginRight: theme.spacing(1),
+	color: 'rgba(0, 0, 0, 0.85)',
+	fontFamily: [
+		'-apple-system',
+		'BlinkMacSystemFont',
+		'"Segoe UI"',
+		'Roboto',
+		'"Helvetica Neue"',
+		'Arial',
+		'sans-serif',
+		'"Apple Color Emoji"',
+		'"Segoe UI Emoji"',
+		'"Segoe UI Symbol"',
+	].join(','),
+	'&:hover': {
+		color: '#40a9ff',
+		opacity: 1,
 	},
-	padding: {
-		padding: theme.spacing(3),
+	'&.Mui-selected': {
+		color: '#1890ff',
+		fontWeight: theme.typography.fontWeightMedium,
 	},
-	demo1: {
-		backgroundColor: theme.palette.background.paper,
+	'&.Mui-focusVisible': {
+		backgroundColor: '#d1eaff',
 	},
-	blank: {
-		marginRight: '70%'
+	forum: {
+		flexGrow: 1
 	}
 }));
 
-export default function CustomizedTabs(props) {
-	const classes = useStyles();
-	const [value, setValue] = React.useState(parseInt(props.id));
+
+export default function CustomizedTabs() {
+	const [value, setValue] = React.useState(1);
+
+	const navigate = useNavigate();
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
-	const Nav = () => {
-		return (
-			<AntTabs value={value} onChange={handleChange} aria-label="ant example">
-				<AntTab href= '/' label="Home" />
-				<AntTab href='/hub' label="Hub" />
-				<AntTab href='/forum' label="Forum" className={classes.blank} />
-				<AntTab href='/welcome' label="Sign In" />
-			</AntTabs>
-				)
+	const handleClick = (e) => {
+		e.preventDefault();
+		if (e.target.id === 'hub') {
+			navigate('/hub');
+		}
+		else if (e.target.id === 'home') {
+			navigate('/');
+		}
+		else if (e.target.id === 'forum') {
+			navigate('/forum');
+		}
+		else if (e.target.id === 'signin') {
+			navigate('/signin');
+		}
 	}
+	
 	return (
-		<div className={classes.root}>
-			<div className={classes.demo1}>
-					<Routes>
-						<Route exact path='/' element={<Nav />} />
-						{/* <Route path='/hub' element={<AntTab label="Hub" /> } />
-						<Route path='/forum' element={<AntTab label="Forum" className={classes.blank} /> } />
-						<Route path='/signin' element={<AntTab label="Sign In" Icon={<AcUnitIcon />} /> } /> */}
+		<Box sx={{ width: '100%' }}>
+			<Box sx={{ bgcolor: '#fff' }}>
+				<AntTabs value={value} onChange={handleChange} className="root" aria-label="ant example">
+					<h4 style={{marginLeft: 7,marginTop: 7, marginRight: 17, color: 'Grey'}}>KHub</h4>
+					<AntTab id='home' onClick={handleClick} label="Home" />
+					<AntTab id='hub' onClick={handleClick} label="Hub" />
+					<AntTab id='forum' onClick={handleClick} className="forum"  label="Forum" />
+					{/* <AntTab id='signin' onClick={handleClick} label="Sign In" /> */}
 
-					</Routes>
-					{/* <AntTab label="Home" />
-					<AntTab label="Hub" />
-					<AntTab label="Forum" className={classes.blank} />
-					<AntTab label="Sign In" Icon={<AcUnitIcon />} /> */}
-				<Typography className={classes.padding} />
-			</div>
-			</div>
+				</AntTabs>
+				<Box sx={{ p: 3 }} />
+			</Box>
+		</Box>
 	);
 }
+

@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
+	year: {
+		type: String
+	},
+	branch: {
+		type: String
+	},
 	password: {
 		type: String
 	},

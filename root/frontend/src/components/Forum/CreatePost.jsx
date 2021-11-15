@@ -11,7 +11,6 @@ export default class Welcome extends Component {
     super(props);
     this.state = {
       author: "",
-      email: "",
       text: "",
     };
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +20,6 @@ export default class Welcome extends Component {
     event.preventDefault();
     Axios.post("http://localhost:4001/api/posts/", {
       author: this.state.author,
-      email: this.state.email,
       text: this.state.text,
     })
       .then((res) => {
@@ -34,8 +32,6 @@ export default class Welcome extends Component {
   handleChange(e) {
     if (e.target.name === "name") {
       this.setState({ author: e.target.value });
-    } else if (e.target.name === "email") {
-      this.setState({ email: e.target.value });
     } else if (e.target.name === "text") {
       this.setState({ text: e.target.value });
     }
@@ -50,18 +46,6 @@ export default class Welcome extends Component {
             type="text"
             placeholder="Name"
             name="name"
-            className="form-control"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label for="exampleInputEmail1" style={customStyle}>
-            Email
-          </label>
-          <input
-            type="text"
-            placeholder="Email"
-            name="email"
             className="form-control"
             onChange={this.handleChange}
           />

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import Navbar from '../Navbar/Navbar';
+import { Typography } from '@material-ui/core';
 
 export default function Welcome() {
 	const [data, setData] = useState();
 
 	return (
 		<div>
-			<Navbar id="3" />
 			<div className="container">
-				<h1>Welcome.</h1>
+				<h1>Welcome to KHub</h1>
+				<p style={{fontSize: 20}} >One stop solution for all your resource requirements.</p>
 			</div>
 		</div>
 	)

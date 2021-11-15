@@ -54,11 +54,10 @@ router.post('/', async (req, res) => {
     const newMember = {
         id: uuid.v4(),
         author: req.body.author,
-        email: req.body.email,
         text: req.body.text
     };
-    if(!newMember.author || !newMember.email) {
-        return res.status(400).json({mssg: 'Please include a author and a email.'});
+    if(!newMember.author || !newMember.text) {
+        return res.status(400).json({mssg: 'Please include a author and a text.'});
     }
     await posts.create(newMember, err => {
         if (err) throw err;
