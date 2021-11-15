@@ -10,8 +10,19 @@ const postSchema = new mongoose.Schema({
         default: null
     },
     email: {
-        type: String,
-        unique: false
+        type: String
+    },
+    year: {
+        type: Number
+    },
+    branch: {
+        type: String
+    },
+    subject: {
+        type: String
+    },
+    topic: {
+        type: String
     },
     text: {
         type: String,

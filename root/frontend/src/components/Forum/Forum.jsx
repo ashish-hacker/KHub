@@ -3,6 +3,8 @@ import React, {
     useEffect
 } from 'react'
 import CreatePost from './CreatePost'
+import PostCard from './PostCard';
+
 export default function Show() {
     const [user, setUser] = useState(0);
     const [post, setPost] = useState(false);
@@ -23,7 +25,8 @@ export default function Show() {
     return (
       <div className="container">
             <button onClick={handleClick} className='btn' style={{ backgroundColor: 'whitesmoke' }}>Add Post</button>
-            {post?<CreatePost />: <p></p>}
+            {post ? <CreatePost /> : <p></p>}
+            <PostCard />
       </div>
     );
 }
