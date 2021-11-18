@@ -1,18 +1,39 @@
-const blobServiceClient = require('../db/connBlob');
+const containerClient = require('./createContainer');
 const express = require('express');
+const {
+    Readable
+} = require('stream');
+
 const router = express.Router();
 
-// Upload Data into container
-async function uploadData() {
-    const containerClient = blobServiceClient.getContainerClient(containerName);
 
-    const content = "Hello world!";
-    const blobName = "newblob" + new Date().getTime();
+// Upload Data into container
+async function uploadData(props) {
+    // const content = props.file;
+    
+    const blobName = props.name;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
+    let uploadBlobResponse;
+    try {
+        const stream = Readable.from(props.data.toString());
+        uploadBlobResponse = await blockBlobClient.uploadStream(stream, stream.length);
+    } catch (err) {
+        console.log(err);
+        return err;
+    }
     console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
+    return uploadBlobResponse;
 }
 
-router.post('/', (req, res) => {
-    
+router.post('/', async (req, res) => {
+    // console.log(req.files);
+    if (!req.files) {
+        return res.status(400).json({
+            msg: 'No file uploaded'
+        });
+    }
+    const uploadBlobResponse = await uploadData(req.files.file);
+    res.status(200).send(uploadBlobResponse);
 })
+
+module.exports = router;

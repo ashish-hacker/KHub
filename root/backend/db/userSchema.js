@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-	first_name: {
+	id: {
 		type: String,
-		default: null
+		unique: true
 	},
-	last_name: {
+	name: {
 		type: String,
 		default: null
 	},
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
 		unique: true
 	},
 	year: {
-		type: String
+		type: Number
 	},
 	branch: {
 		type: String
@@ -31,4 +31,4 @@ const userSchema = new mongoose.Schema({
 	},
 });
 
-module.exports = mongoose.model("user", userSchema);
+module.exports = mongoose.model("users", userSchema);

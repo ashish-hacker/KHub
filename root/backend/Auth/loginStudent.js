@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const store = require('store');
 require("dotenv").config({
     path: "./config.env"
 });
@@ -45,13 +46,12 @@ router.post("/", async (req, res) => {
             res.status(200).json(user);
         }
         else {
-            // res.status(400).send("Invalid Credentials");
+            res.status(409).send("Invalid Credentials");
         }
             
     } catch (err) {
         console.log(err);
     }
-    // Our register logic ends here
 });
 
 

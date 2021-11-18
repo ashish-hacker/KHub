@@ -1,19 +1,31 @@
-import React from 'react';
+// scroll bar
+import 'simplebar/src/simplebar.css';
+
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+//
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+
+require('dotenv').config({
+  path: './config.env'
+});
+
+// ----------------------------------------------------------------------
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
+  <HelmetProvider>
+    <BrowserRouter>
       <App />
-    </Router>
-  </React.StrictMode>,
+    </BrowserRouter>
+  </HelmetProvider>,
   document.getElementById('root')
 );
+
+// If you want to enable client cache, register instead.
+serviceWorker.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

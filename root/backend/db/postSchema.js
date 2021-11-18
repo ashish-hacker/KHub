@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        unique: true
-    },
     author: {
         type: String,
         default: null
@@ -13,13 +9,16 @@ const postSchema = new mongoose.Schema({
         type: String
     },
     year: {
-        type: Number
+        type: Number,
+        default: 4
     },
     branch: {
-        type: String
+        type: String,
+        default: "CSE"
     },
     subject: {
-        type: String
+        type: String,
+        default: "Web"
     },
     topic: {
         type: String
