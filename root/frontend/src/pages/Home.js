@@ -1,5 +1,9 @@
+//  react
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 // material
 import { Box, Grid, Container, Typography } from '@mui/material';
+import axios from 'axios';
 // components
 import Page from '../components/Page';
 import {
@@ -20,8 +24,36 @@ import {
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    try {
+      axios
+        .post('http://localhost:4001/api/forum/access', {
+          token: localStorage.getItem('jwt')
+        })
+        .then((res) => {
+          if (res.status !== 200) {
+            navigate('/login', {
+              replace: true
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate('/login', {
+            replace: true
+          });
+        });
+    } catch (err) {
+      console.log(err);
+      navigate('/login', {
+        replace: true
+      });
+    }
+  });
+
   return (
-    <Page title="Dashboard">
+    <Page title="Home">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Hi, Welcome back</Typography>
@@ -44,7 +76,7 @@ export default function DashboardApp() {
             <AppWebsiteVisits />
           </Grid> */}
 
-          {/* <Grid item xs={12} md={6} lg={4}>
+          {/* <Grid item xs={12} md={12} lg={4}>
             <AppCurrentVisits />
           </Grid> */}
 
@@ -55,8 +87,11 @@ export default function DashboardApp() {
           {/* <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject />
           </Grid> */}
-          <Grid item md={10} lg={8}>
-            <Typography>Hello There!</Typography>
+          <Grid item xs="auto" md={10} lg={8}>
+            <Typography>
+              Hello There! &nbsp;
+              <code>print()</code>
+            </Typography>
           </Grid>
 
           {/* <Grid item xs={12} md={6} lg={8}>

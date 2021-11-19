@@ -5,7 +5,7 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Login from './pages/Login';
 import Register from './pages/Register';
-import DashboardApp from './pages/DashboardApp';
+import DashboardApp from './pages/Home';
 import Blog from './pages/Forum';
 import Hub from './pages/Hub';
 import NotFound from './pages/Page404';
@@ -16,10 +16,10 @@ import NewResource from './pages/NewResource';
 export default function Router() {
   return useRoutes([
     {
-      path: '/dashboard',
+      path: '/',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" replace /> },
+        { element: <Navigate to="/app" replace /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'hub', element: <Hub /> },
         { path: 'forum', element: <Blog /> }
@@ -32,7 +32,7 @@ export default function Router() {
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
-        { path: '/', element: <Navigate to="/dashboard" /> }
+        { path: '/', element: <Navigate to="/" /> }
         // { path: '*', element: <Navigate to="/404" /> }
       ]
     },

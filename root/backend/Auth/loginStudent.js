@@ -43,7 +43,7 @@ router.post("/", async (req, res) => {
             user.token = token;
 
             // user
-            res.status(200).json(user);
+            res.status(200).send(user);
         }
         else {
             res.status(409).send("Invalid Credentials");

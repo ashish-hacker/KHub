@@ -1,6 +1,9 @@
 import { Icon } from '@iconify/react';
 import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
+import axios from 'axios';
+// react
+import { useEffect } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
@@ -20,8 +23,36 @@ const SORT_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function Blog() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    try {
+      axios
+        .post('http://localhost:4001/api/forum/access', {
+          token: localStorage.getItem('jwt')
+        })
+        .then((res) => {
+          if (res.status !== 200) {
+            navigate('/login', {
+              replace: true
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate('/login', {
+            replace: true
+          });
+        });
+    } catch (err) {
+      console.log(err);
+      navigate('/login', {
+        replace: true
+      });
+    }
+  });
+
   return (
-    <Page title="Dashboard: Blog | Minimal-UI">
+    <Page title="Forum">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>

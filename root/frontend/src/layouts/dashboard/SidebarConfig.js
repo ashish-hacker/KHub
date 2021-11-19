@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import pieChart2Fill from '@iconify/icons-eva/pie-chart-2-fill';
+import homeIcon from '@iconify/icons-entypo/home';
 import bookFill from '@iconify/icons-eva/book-fill';
 import shoppingBagFill from '@iconify/icons-eva/shopping-bag-fill';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
@@ -13,18 +13,18 @@ const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
 
 const sidebarConfig = [
   {
-    title: 'dashboard',
-    path: '/dashboard/app',
-    icon: getIcon(pieChart2Fill)
+    title: 'home',
+    path: '/app',
+    icon: getIcon(homeIcon)
   },
   {
     title: 'hub',
-    path: '/dashboard/hub',
+    path: '/hub',
     icon: getIcon(bookFill)
   },
   {
     title: 'forum',
-    path: '/dashboard/forum',
+    path: '/forum',
     icon: getIcon(fileTextFill)
   },
   {

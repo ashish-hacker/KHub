@@ -1,27 +1,16 @@
 const express = require('express');
 const uuid = require('uuid');
 const router = express.Router();
-
-// Dummy database 
-// DONE : Use MongoDB 
-// const posts = [
-//     {
-//         "id": 1,
-//         "author": "ashish",
-//         "email": "xyz@z.com",
-//         "text": "something"
-//     },
-//     {
-//         "id": 2,
-//         "author": "kumar",
-//         "email": "abc@z.com",
-//         "text": "something1"
-//     }
-// ];
+const auth = require("../Auth/auth");
 
 // Mongodb database
 const posts = require('../db/postSchema');
 const users = require('../db/userSchema');
+
+// Get access to the forum
+router.post('/forum', auth, (req, res) => {
+    res.status(200).send("Access to Froum is granted!");
+});
 
 // Get Posts
 router.get('/', async (req, res) => {

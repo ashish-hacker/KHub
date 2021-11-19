@@ -2,6 +2,7 @@ import faker from 'faker';
 import { sample } from 'lodash';
 // utils
 import { mockImgAvatar } from '../utils/mockImages';
+import { fDateTimeSuffix } from '../utils/formatTime';
 
 // ----------------------------------------------------------------------
 
@@ -34,11 +35,11 @@ const getList = () => {
       data.map((blob) => {
         blobs.push({
           id: faker.datatype.uuid(),
-          avatarUrl: mockImgAvatar(1),
+          avatarUrl: mockImgAvatar(parseInt(Math.random() * 10, 10)),
           name: 'Ashish',
           topic: 'Web Development',
           status: 'active',
-          lastModified: blob.properties.lastModified,
+          lastModified: fDateTimeSuffix(blob.properties.lastModified),
           filename: blob.name
         });
         return true;

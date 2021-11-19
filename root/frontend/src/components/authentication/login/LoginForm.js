@@ -48,13 +48,17 @@ export default function LoginForm() {
         })
         .then((res) => {
           if (res) {
+            console.log(res);
             setAuth(res.status);
+            localStorage.setItem('jwt', res.data.token);
+            localStorage.setItem('email', res.data.email);
+            localStorage.setItem('user_id', res.data._id);
           }
         })
         .catch((err) => console.log(err));
       if (auth === 200) {
         isSubmitting = true;
-        console.log(localStorage.getItem('da@b.com'));
+        console.log(localStorage.getItem('email'));
         navigate('/', {
           replace: true
         });

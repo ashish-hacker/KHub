@@ -38,7 +38,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 export default function Login() {
   const [file, setFile] = useState(null);
   const [author, setAuthor] = useState('');
-  const [tags, setTags] = useState('');
+  const [tag, setTags] = useState('');
   const navigate = useNavigate();
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,6 +57,8 @@ export default function Login() {
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData();
+    formData.append('name', author);
+    formData.append('topic', tag);
     formData.append('file', file);
     try {
       const res = await axios.post('http://localhost:4001/api/hub/upload', formData, {
@@ -73,7 +75,7 @@ export default function Login() {
     } catch (err) {
       console.log(err);
     }
-    navigate('/dashboard/hub', { replace: true });
+    navigate('/hub', { replace: true });
   };
 
   return (

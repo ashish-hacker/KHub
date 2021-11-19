@@ -45,12 +45,21 @@ app.use("/auth/login/admin",  require("./Auth/loginAdmin"));
 
 // Resource upload , download and search
 // Upload blob
+app.use("/api/hub/access", require("./Knowledge-Hub/access"));
 app.use("/api/hub/upload", require("./Knowledge-Hub/upload"));
 app.use("/api/hub/list", require("./Knowledge-Hub/list"));
+app.use("/api/hub/download", require("./Knowledge-Hub/download"));
+app.use("/api/hub/delete", require("./Knowledge-Hub/deleteBlob"));
 // app.use()
 
 // Posts API
 app.use("/api/posts", require("./Posts/posts"));
+app.use("/api/forum/access", require("./Posts/access"));
+
+// Access to home
+app.use("/api/home/access", require("./home/access"));
+app.use("/api/fetchUser", require("./home/fetchUser"));
+
 
 // All other GET requests not handled before will return our React app
 // app.get("*", (req, res) => {

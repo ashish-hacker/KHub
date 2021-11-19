@@ -3,7 +3,8 @@ import { Icon } from '@iconify/react';
 import { sentenceCase } from 'change-case';
 import { useState, useEffect } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 // material
 import {
   Card,
@@ -25,7 +26,7 @@ import Page from '../components/Page';
 import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dashboard/user';
+import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dashboard/Hub';
 //
 import USERLIST from '../_mocks_/user';
 
@@ -77,11 +78,34 @@ export default function User() {
   const [orderBy, setOrderBy] = useState('name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  // // const [USERLIST, setUSERLIST] = useState([
-  //   {
-  //     name: 'Ashish'
-  //   }
-  // ]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    try {
+      axios
+        .post('http://localhost:4001/api/hub/access', {
+          token: localStorage.getItem('jwt')
+        })
+        .then((res) => {
+          if (res.status !== 200) {
+            navigate('/login', {
+              replace: true
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate('/login', {
+            replace: true
+          });
+        });
+    } catch (err) {
+      console.log(err);
+      navigate('/login', {
+        replace: true
+      });
+    }
+  });
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -213,7 +237,7 @@ export default function User() {
                           </TableCell>
 
                           <TableCell align="right">
-                            <UserMoreMenu />
+                            <UserMoreMenu name={filename} arr={USERLIST} />
                           </TableCell>
                         </TableRow>
                       );
