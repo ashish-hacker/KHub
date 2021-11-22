@@ -20,7 +20,8 @@ import {
   Container,
   Typography,
   TableContainer,
-  TablePagination
+  TablePagination,
+  CircularProgress
 } from '@mui/material';
 // components
 import { fi } from 'date-fns/locale';
@@ -100,18 +101,14 @@ export default function User() {
   const [orderBy, setOrderBy] = useState('lastModified');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
   const navigate = useNavigate();
   const [filteredUsers, setFilters] = useState([]);
   const [inReviewFiles, setInReviewFiles] = useState([]);
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredUsers.length) : 0;
-  const isUserNotFound = filteredUsers.length === 0;
+  const isUserNotFound = filteredUsers.length === 0 && !loading;
   const isAdmin = localStorage.getItem('is_admin') === 'true';
-
-  useEffect(async () => {
-    const res = await getList();
-    setFilters(res);
-  }, []);
 
   useEffect(async () => {
     try {
@@ -139,6 +136,12 @@ export default function User() {
         replace: true
       });
     }
+  }, []);
+
+  useEffect(async () => {
+    const res = await getList();
+    setFilters(res);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -391,6 +394,15 @@ export default function User() {
                     </TableRow>
                   )}
                 </TableBody>
+                {loading && (
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <CircularProgress />
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                )}
                 {isUserNotFound && (
                   <TableBody>
                     <TableRow>

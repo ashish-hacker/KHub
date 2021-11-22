@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { React, useState } from 'react';
 // material
 import { styled } from '@mui/material/styles';
-import { Stack, Container, Typography, TextField } from '@mui/material';
+import { Box, Stack, Container, Typography, TextField, LinearProgress } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // layouts
 // import AuthLayout from '../layouts/AuthLayout';
@@ -34,6 +34,20 @@ const ContentStyle = styled('div')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
+function LinearProgressWithLabel(props) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ width: '100%', mr: 1 }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
 
 export default function NewResc(votes) {
   const [file, setFile] = useState(null);
@@ -94,7 +108,7 @@ export default function NewResc(votes) {
             <TextField id="author" label="Author" color="success" focused onChange={handleChange} />
             <TextField id="tags" label="Topic" color="success" focused onChange={handleChange} />
             <input id="file" type="file" onChange={handleChange} required />
-            <Progress percentage={uploadPercentage} />
+            <LinearProgressWithLabel value={uploadPercentage} />
             <LoadingButton
               fullWidth
               size="large"
