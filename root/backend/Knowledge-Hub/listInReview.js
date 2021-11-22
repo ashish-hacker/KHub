@@ -1,4 +1,5 @@
-const containerClient = require('./createContainer');
+const containerClient = require('./getReviewContainer');
+const auth = require('../Auth/auth');
 const express = require('express');
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
         };
         blobs.push(data);
     }
-    
+
     res.status(200).send(blobs);
 })
 

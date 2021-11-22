@@ -6,7 +6,6 @@ import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import axios from 'axios';
-import store from 'store';
 
 // material
 import {
@@ -25,7 +24,6 @@ import { LoadingButton } from '@mui/lab';
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [auth, setAuth] = useState(0);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -42,37 +40,37 @@ export default function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       axios
-        .post('http://localhost:4001/auth/login/student', {
+        .post('/auth/login/student', {
           email: values.email,
           password: values.password
         })
         .then((res) => {
           if (res) {
-            console.log(res);
-            setAuth(res.status);
+            // setAuth(res.status);
             localStorage.setItem('jwt', res.data.token);
             localStorage.setItem('email', res.data.email);
-            localStorage.setItem('user_id', res.data._id);
+            localStorage.setItem('is_admin', res.data.is_admin);
+            if (res.status === 200) {
+              isSubmitting = true;
+              // console.log(localStorage.getItem('email'));
+              navigate('/', {
+                replace: true
+              });
+              window.location.reload();
+            } else if (res.status === 409) {
+              alert('Invalid Credentials!!');
+              navigate('/login', {
+                replace: true
+              });
+            } else if (res.status === 400) {
+              alert('All Inputs are required!');
+              navigate('/login', {
+                replace: true
+              });
+            }
           }
         })
         .catch((err) => console.log(err));
-      if (auth === 200) {
-        isSubmitting = true;
-        console.log(localStorage.getItem('email'));
-        navigate('/', {
-          replace: true
-        });
-      } else if (auth === 409) {
-        alert('Invalid Credentials!!');
-        navigate('/login', {
-          replace: true
-        });
-      } else if (auth === 400) {
-        alert('All Inputs are required!');
-        navigate('/login', {
-          replace: true
-        });
-      }
     }
   });
 

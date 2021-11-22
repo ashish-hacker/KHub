@@ -1,28 +1,21 @@
-const containerClient = require('./createContainer');
+const containerClient = require('./getReviewContainer');
 const express = require('express');
-const {
-    Readable
-} = require('stream');
 
 const router = express.Router();
 
 
 // Upload Data into container
 async function uploadData(props) {
-    // const content = props.file;
-    
-    const blobName = props.name;
+    // console.log(props);
+    const blobName = props.files.file.name;
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     let uploadBlobResponse;
     try {
-        // const stream = Readable.from(props.data.toString());  if want to upload as a stream
-        uploadBlobResponse = await blockBlobClient.uploadData(props.data, {
-            metadata: {
-                'name': props.name
-            },
-            tags: {
-                'topic': props.topic
-            }
+        uploadBlobResponse = await blockBlobClient.uploadData(props.files.file.data);
+        blockBlobClient.setMetadata({
+            'author': props.body.author,
+            'topic': props.body.topic,
+            'votes': "0"
         });
         }
         catch (err) {
@@ -34,13 +27,13 @@ async function uploadData(props) {
 }
 
 router.post('/', async (req, res) => {
-    // console.log(req.files);
+    // console.log(req);
     if (!req.files) {
         return res.status(400).json({
             msg: 'No file uploaded'
         });
     }
-    const uploadBlobResponse = await uploadData(req.files.file);
+    const uploadBlobResponse = await uploadData(req);
     res.status(200).send(uploadBlobResponse);
 })
 

@@ -35,7 +35,7 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function Login() {
+export default function NewResc(votes) {
   const [file, setFile] = useState(null);
   const [author, setAuthor] = useState('');
   const [tag, setTags] = useState('');
@@ -57,9 +57,10 @@ export default function Login() {
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData();
-    formData.append('name', author);
+    formData.append('author', author);
     formData.append('topic', tag);
     formData.append('file', file);
+    formData.append('votes', votes);
     try {
       const res = await axios.post('http://localhost:4001/api/hub/upload', formData, {
         headers: {
@@ -76,6 +77,7 @@ export default function Login() {
       console.log(err);
     }
     navigate('/hub', { replace: true });
+    window.location.reload();
   };
 
   return (
@@ -90,7 +92,7 @@ export default function Login() {
           </Stack>
           <Stack spacing={3}>
             <TextField id="author" label="Author" color="success" focused onChange={handleChange} />
-            <TextField id="tags" label="Tags" color="success" focused onChange={handleChange} />
+            <TextField id="tags" label="Topic" color="success" focused onChange={handleChange} />
             <input id="file" type="file" onChange={handleChange} required />
             <Progress percentage={uploadPercentage} />
             <LoadingButton

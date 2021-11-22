@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
+    console.log("In serializer");
     done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
@@ -22,6 +23,7 @@ passport.use(
             proxy: true,
         },
         async (accessToken, refreshToken, profile, done) => {
+            console.log("In strategy");
             let existingUser = null;
             try {
                 existingUser = await User.findOne({

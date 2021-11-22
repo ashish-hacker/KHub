@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import faker from 'faker';
 // material
 import {
   Card,
@@ -22,22 +23,42 @@ import {
   TablePagination
 } from '@mui/material';
 // components
+import { fi } from 'date-fns/locale';
+import getList from '../_mocks_/user';
+import httpReq from '../authware';
 import Page from '../components/Page';
 import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dashboard/Hub';
+import FilteredUsersHead from '../components/_dashboard/Hub/FileListHead';
+import DownloadFromTemp from '../components/_dashboard/Hub/DownloadFromTemp';
+import DownloadFromMain from '../components/_dashboard/Hub/DownloadFromMain';
+import FilteredUsersToolbar from '../components/_dashboard/Hub/FileListToolbar';
+import Delete from '../components/_dashboard/Hub/Delete';
+import Approve from '../components/_dashboard/Hub/Approve';
+import DisApprove from '../components/_dashboard/Hub/DisApprove';
+import ChangeVote from '../components/_dashboard/Hub/ChangeVote';
+// utils
+import { mockImgAvatar } from '../utils/mockImages';
+import { fDateTimeSuffix } from '../utils/formatTime';
 //
-import USERLIST from '../_mocks_/user';
 
 // ----------------------------------------------------------------------
 
+const TABLE_HEAD_REV = [
+  { id: 'name', label: 'Uploader', alignRight: false },
+  { id: 'File Name', label: 'File', alignRight: false },
+  { id: 'Related Subject', label: 'Topic', alignRight: false },
+  { id: 'Upload Date', label: 'Uploaded on', alignRight: false },
+  { id: 'Approve', label: 'Approve', alignRight: false },
+  { id: 'Disapprove', label: 'Disapprove', alignRight: false }
+];
 const TABLE_HEAD = [
   { id: 'name', label: 'Uploader', alignRight: false },
   { id: 'File Name', label: 'File', alignRight: false },
-  { id: 'Related Subject', label: 'Topic Related to', alignRight: false },
+  { id: 'Related Subject', label: 'Topic', alignRight: false },
   { id: 'Upload Date', label: 'Uploaded on', alignRight: false },
-  { id: '' }
+  { id: 'votes', label: 'Votes', alignRight: false }
 ];
 
 // ----------------------------------------------------------------------
@@ -58,6 +79,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
+// apply filters on table with the query provided
 function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -75,15 +97,26 @@ export default function User() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
-  const [orderBy, setOrderBy] = useState('name');
+  const [orderBy, setOrderBy] = useState('lastModified');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [count, setCount] = useState(1);
   const navigate = useNavigate();
+  const [filteredUsers, setFilters] = useState([]);
+  const [inReviewFiles, setInReviewFiles] = useState([]);
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredUsers.length) : 0;
+  const isUserNotFound = filteredUsers.length === 0;
+  const isAdmin = localStorage.getItem('is_admin') === 'true';
 
-  useEffect(() => {
+  useEffect(async () => {
+    const res = await getList();
+    setFilters(res);
+  }, []);
+
+  useEffect(async () => {
     try {
-      axios
-        .post('http://localhost:4001/api/hub/access', {
+      await axios
+        .post('/api/hub/access', {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {
@@ -91,6 +124,7 @@ export default function User() {
             navigate('/login', {
               replace: true
             });
+            console.log(res);
           }
         })
         .catch((err) => {
@@ -105,16 +139,46 @@ export default function User() {
         replace: true
       });
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (!isAdmin) {
+      return;
+    }
+    const mode = 'get';
+    const endpoint = '/api/hub/listReview';
+    const reqBody = {
+      token: ''
+    };
+    const reviewFiles = httpReq(mode, endpoint, reqBody);
+    const blobs = [];
+    try {
+      reviewFiles.then((res) => {
+        res.map((blob) => {
+          blobs.push({
+            id: faker.datatype.uuid(),
+            avatarUrl: mockImgAvatar(parseInt(Math.random() * 10, 10)),
+            name: blob.metadata.author,
+            topic: blob.metadata.topic,
+            lastModified: fDateTimeSuffix(blob.blobData.properties.lastModified),
+            filename: blob.blobData.name
+          });
+          return true;
+        });
+      });
+      setInReviewFiles(blobs);
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(inReviewFiles);
+  }, []);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    console.log('handle');
   };
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = filteredUsers.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -148,18 +212,104 @@ export default function User() {
     setPage(0);
   };
 
-  const handleFilterByName = (event) => {
-    setFilterName(event.target.value);
+  const handleSearchChange = (e) => {
+    setFilterName(e.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
-
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
-
-  const isUserNotFound = filteredUsers.length === 0;
+  const sendQuery = async () => {
+    try {
+      await axios
+        .post('/api/hub/search', {
+          q: filterName,
+          top: 20,
+          skip: 0,
+          filters: []
+        })
+        .then((res) => {
+          setFilters(res.data.results);
+          // console.log(filteredUsers);
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Page title="Resource Hub">
+      {isAdmin && inReviewFiles && inReviewFiles.length !== 0 && (
+        <Container gutterBottom>
+          <Typography variant="h4" gutterBottom>
+            Review These Resources
+          </Typography>
+          <Card gutterBottom>
+            <Scrollbar>
+              <TableContainer sx={{ minWidth: 800 }}>
+                <Table>
+                  <FilteredUsersHead
+                    order={order}
+                    orderBy={orderBy}
+                    headLabel={TABLE_HEAD_REV}
+                    rowCount={filteredUsers ? filteredUsers.length : 0}
+                    numSelected={selected.length}
+                    onRequestSort={handleRequestSort}
+                    onSelectAllClick={handleSelectAllClick}
+                  />
+                  <TableBody>
+                    {inReviewFiles
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row) => {
+                        const { id, name, filename, avatarUrl, lastModified, topic } = row;
+                        const isItemSelected = selected.indexOf(name) !== -1;
+
+                        return (
+                          <TableRow
+                            hover
+                            key={id}
+                            tabIndex={-1}
+                            role="option"
+                            selected={isItemSelected}
+                            aria-checked={isItemSelected}
+                          >
+                            <TableCell component="th" scope="row" padding="none">
+                              <Stack direction="row" alignItems="center" spacing={2}>
+                                <Typography>&nbsp;</Typography>
+                                <Avatar alt="" src={avatarUrl} />
+                                <Typography variant="subtitle2" noWrap>
+                                  {name}
+                                </Typography>
+                              </Stack>
+                            </TableCell>
+                            <TableCell align="left">
+                              <DownloadFromTemp filename={filename} />
+                            </TableCell>
+                            <TableCell align="left">{topic}</TableCell>
+                            <TableCell align="left"> {lastModified} </TableCell>
+                            <TableCell align="left">
+                              <Approve filename={filename} arr={inReviewFiles} />
+                            </TableCell>
+                            <TableCell align="left">
+                              <DisApprove filename={filename} />
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    {emptyRows > 0 && (
+                      <TableRow style={{ height: 53 * emptyRows }}>
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Scrollbar>
+          </Card>
+          <Typography variant="h4" gutterBottom>
+            &nbsp;
+          </Typography>
+        </Container>
+      )}
+
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
@@ -176,72 +326,65 @@ export default function User() {
         </Stack>
 
         <Card>
-          <UserListToolbar
+          <FilteredUsersToolbar
             numSelected={selected.length}
             filterName={filterName}
-            onFilterName={handleFilterByName}
+            onFilterName={handleSearchChange}
+            handleClick={sendQuery}
           />
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
-                <UserListHead
+                <FilteredUsersHead
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={filteredUsers ? filteredUsers.length : 0}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const { id, name, filename, lastModified, avatarUrl, topic } = row;
-                      const isItemSelected = selected.indexOf(name) !== -1;
+                  {filteredUsers &&
+                    filteredUsers
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row) => {
+                        const { id, name, filename, lastModified, avatarUrl, topic, votes } = row;
+                        const isItemSelected = selected.indexOf(name) !== -1;
 
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell>
-                          <TableCell component="th" scope="row" padding="none">
-                            <Stack direction="row" alignItems="center" spacing={2}>
-                              <Avatar alt={name} src={avatarUrl} />
-                              <Typography variant="subtitle2" noWrap>
-                                {name}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell align="left">{filename}</TableCell>
-                          <TableCell align="left">{topic}</TableCell>
-                          <TableCell align="left">
-                            {/* <Label
-                              variant="ghost"
-                              color={(status === 'banned' && 'error') || 'success'}
-                            >
-                              {sentenceCase(status)}
-                            </Label> */}
-                            {lastModified}
-                          </TableCell>
-
-                          <TableCell align="right">
-                            <UserMoreMenu name={filename} arr={USERLIST} />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
+                        return (
+                          <TableRow hover key={id} tabIndex={-1}>
+                            <TableCell component="th" scope="row" padding="none">
+                              <Stack direction="row" alignItems="center" spacing={2}>
+                                <Typography>&nbsp;</Typography>
+                                <Avatar padding="same" align="center" alt="" src={avatarUrl} />
+                                <Typography variant="subtitle2" noWrap>
+                                  {name}
+                                </Typography>
+                              </Stack>
+                            </TableCell>
+                            <TableCell align="left">
+                              <DownloadFromMain filename={filename} />
+                            </TableCell>
+                            <TableCell align="left">{topic}</TableCell>
+                            <TableCell align="left"> {lastModified} </TableCell>
+                            <TableCell component="th" scope="row" padding="none">
+                              <ChangeVote
+                                username={name}
+                                fname={filename}
+                                topicName={topic}
+                                votes={votes}
+                              />
+                            </TableCell>
+                            {isAdmin && (
+                              <TableCell align="right">
+                                <Delete filename={filename} arr={filteredUsers} />
+                              </TableCell>
+                            )}
+                          </TableRow>
+                        );
+                      })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -264,7 +407,7 @@ export default function User() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={filteredUsers.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

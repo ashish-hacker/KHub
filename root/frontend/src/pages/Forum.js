@@ -49,7 +49,7 @@ export default function Blog() {
         replace: true
       });
     }
-  });
+  }, []);
 
   return (
     <Page title="Forum">

@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
                     branch: r.branch,
                     year: r.year
                 }
-                res.status(200).send(r);
+                res.status(200).send(response);
             });
     } catch (err) {
         console.log(err);

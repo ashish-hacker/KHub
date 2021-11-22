@@ -2,7 +2,7 @@ const blobServiceClient = require('../db/connBlob');
 
 
 // name of the container
-const containerName = process.env.TEMP_CONTAINER_NAME;
+const containerName = process.env.IN_REVIEW_CONTAINER;
 
 console.log(`\nGetting container...${containerName}`);
 

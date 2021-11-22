@@ -1,7 +1,7 @@
 const express = require('express');
 const auth = require('../Auth/auth');
 const router = express.Router();
-const containerClient = require('./createContainer'); // Azure service client
+const containerClient = require('./getReviewContainer'); // Azure service client
 
 
 router.delete('/', async (req, res) => {

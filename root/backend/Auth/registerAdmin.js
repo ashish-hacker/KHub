@@ -14,13 +14,11 @@ router.post("/", async (req, res) => {
     try {
         // Get user input
         const {
-            first_name,
-            last_name,
+            name,
             email,
             password
         } = req.body;
 
-        res.send(req);
         // Validate user input
         if (!(email)) {
             res.status(400).send("All input is required");
@@ -42,8 +40,7 @@ router.post("/", async (req, res) => {
 
         // Create user in our database
         const user = await User.create({
-            first_name,
-            last_name,
+            name,
             is_admin: true,
             email: email.toLowerCase(), // sanitize: convert email to lowercase
             password: encryptedPassword,
