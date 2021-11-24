@@ -2,11 +2,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require('cors');
 const express = require("express");
-// const session = require('express-session');
-// const passport = require('passport');
 const fileUpload = require('express-fileupload');
 require("./db/conn").connect();
-// require("./db/userSchema");
 //Auths
 const auth = require("./Auth/auth");
 require("dotenv").config({
@@ -17,18 +14,10 @@ require("dotenv").config({
 // Init app
 const app = express();
 
-// app.use(session({
-//     secret: 'cats',
-//     resave: false,
-//     saveUninitialized: true
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(fileUpload());
 app.use(express.urlencoded({ extended: false }));
-
 app.get('/', (req, res) => res.send("hi"));
 
 
@@ -44,26 +33,7 @@ app.use("/auth/register/admin", require("./Auth/registerAdmin"));
 app.use("/auth/login/student", require("./Auth/loginStudent"));
 app.use("/auth/login/admin",  require("./Auth/loginAdmin"));
 // oAuth(app);
-// app.get('/auth/google',
-//     passport.authenticate('google', {
-//         scope: ['email', 'profile']
-//     }));
-
-// app.get('/auth/google/callback',
-//     passport.authenticate('google', {
-//         successRedirect: '/app',
-//         failureRedirect: '/auth/google/failure'
-//     })
-// );
-// app.get('/logout', (req, res) => {
-//     req.logout();
-//     req.session.destroy();
-//     res.send('Goodbye!');
-// });
-
-// app.get('/auth/google/failure', (req, res) => {
-//     res.send('Failed to authenticate..');
-// });
+// require('./Auth/googleAuth')(app);
 
 
 // Resource upload , download and search

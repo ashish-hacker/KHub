@@ -10,14 +10,19 @@ const getList = async () => {
   await fetch('http://localhost:4001/api/hub/list')
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       data.map((blob) => {
         blobs.push({
           id: faker.datatype.uuid(),
           avatarUrl: mockImgAvatar(parseInt(Math.random() * 10, 10)),
           name: blob.metadata.author,
           topic: blob.metadata.topic,
-          lastModified: fDateTimeSuffix(blob.blobData.properties.lastModified),
+          lastModified: new Date(blob.blobData.properties.lastModified)
+            .toLocaleDateString('en-GB', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric'
+            })
+            .replace(/ /g, '-'),
           filename: blob.blobData.name,
           votes: blob.metadata.votes
         });

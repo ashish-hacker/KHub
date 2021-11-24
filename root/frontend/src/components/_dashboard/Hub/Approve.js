@@ -22,5 +22,5 @@ export default function Approve({ filename, arr }) {
       console.log(err);
     }
   };
-  return <CheckIcon onClick={handleApprove} />;
+  return <CheckIcon onClick={handleApprove} style={{ hover: 'pointer' }} />;
 }

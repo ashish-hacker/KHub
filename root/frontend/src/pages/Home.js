@@ -15,7 +15,7 @@ export default function DashboardApp() {
   useEffect(() => {
     try {
       axios
-        .post('http://localhost:4001/api/forum/access', {
+        .post('http://localhost:4001/api/home/access', {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {

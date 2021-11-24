@@ -163,7 +163,13 @@ export default function User() {
             avatarUrl: mockImgAvatar(parseInt(Math.random() * 10, 10)),
             name: blob.metadata.author,
             topic: blob.metadata.topic,
-            lastModified: fDateTimeSuffix(blob.blobData.properties.lastModified),
+            lastModified: new Date(blob.blobData.properties.lastModified)
+              .toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+              })
+              .replace(/ /g, '-'),
             filename: blob.blobData.name
           });
           return true;
@@ -289,10 +295,14 @@ export default function User() {
                             <TableCell align="left">{topic}</TableCell>
                             <TableCell align="left"> {lastModified} </TableCell>
                             <TableCell align="left">
-                              <Approve filename={filename} arr={inReviewFiles} />
+                              <Approve
+                                filename={filename}
+                                arr={inReviewFiles}
+                                style={{ hover: 'pointer' }}
+                              />
                             </TableCell>
                             <TableCell align="left">
-                              <DisApprove filename={filename} />
+                              <DisApprove filename={filename} style={{ hover: 'pointer' }} />
                             </TableCell>
                           </TableRow>
                         );
@@ -354,7 +364,6 @@ export default function User() {
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => {
                         const { id, name, filename, lastModified, avatarUrl, topic, votes } = row;
-                        const isItemSelected = selected.indexOf(name) !== -1;
 
                         return (
                           <TableRow hover key={id} tabIndex={-1}>

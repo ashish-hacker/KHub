@@ -7,7 +7,7 @@ const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
     console.log("In serializer");
-    done(null, user.id);
+    done(null, user._id);
 });
 passport.deserializeUser((id, done) => {
     User.findById(id).then((user) => {
@@ -17,8 +17,8 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
     new GoogleStrategy({
-            clientID: process.env.GO_CL_ID,
-            clientSecret: process.env.GO_CL_SE,
+            clientID: "9927777094-8vba92po44ku5cdl3nhk1arh7ig7hqij.apps.googleusercontent.com",
+            clientSecret: "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",
             callbackURL: "/auth/google/callback",
             proxy: true,
         },

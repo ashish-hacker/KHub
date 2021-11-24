@@ -21,7 +21,7 @@ export default function DownloadFromMain({ filename }) {
     }
   };
   return (
-    <a href="#" onClick={handleDownload}>
+    <a href="#" onClick={handleDownload} style={{ textDecoration: 'none', color: 'black' }}>
       {filename}
     </a>
   );
