@@ -40,7 +40,7 @@ export default function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       axios
-        .post('http://localhost:4001/auth/login/student', {
+        .post('/auth/login/student', {
           email: values.email,
           password: values.password
         })

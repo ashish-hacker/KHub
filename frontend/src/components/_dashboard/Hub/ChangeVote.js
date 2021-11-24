@@ -9,7 +9,7 @@ ChangeVote.propTypes = {
   fname: PropTypes.string,
   username: PropTypes.string,
   topicName: PropTypes.string,
-  votes: PropTypes.number
+  votes: PropTypes.string
 };
 
 export default function ChangeVote({ fname, username, topicName, votes }) {

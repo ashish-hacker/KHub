@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import ListSubheader from '@mui/material/ListSubheader';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import {
   Button,
   Container,
@@ -22,9 +29,10 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 // components
 import Page from '../components/Page';
 import Delete from '../components/_dashboard/forum/DeletePost';
-import SelectBoard from '../components/_dashboard/forum/SelectBoard';
+// import SelectBoard from '../components/_dashboard/forum/SelectBoard';
 import TableHead from '../components/_dashboard/Hub/FileListHead';
 import Scrollbar from '../components/Scrollbar';
+import SearchNotFound from '../components/SearchNotFound';
 import getPosts from '../components/_dashboard/forum/getPosts';
 import searchPosts from '../components/_dashboard/forum/searchPost';
 import Post from './AddPost';
@@ -123,7 +131,108 @@ export default function Board() {
       });
     }
   }, []);
+
+  function SelectBoard() {
+    const handleChange = (e) => {
+      if (e.target.name === 'year') {
+        setYear(Number(e.target.value));
+      } else if (e.target.name === 'branch') {
+        setBranch(e.target.value);
+      } else if (e.target.name === 'subject') {
+        setSubject(e.target.value);
+      }
+    };
+
+    return (
+      <div>
+        <Box component="form" sx={{ display: 'flex', flexWrap: 'wrap' }}>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-dialog-select-label">Year</InputLabel>
+            <Select
+              labelId="demo-dialog-select-label"
+              id="demo-dialog-select"
+              value={year}
+              name="year"
+              onChange={handleChange}
+              input={<OutlinedInput label="Age" />}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={1}>1st Year</MenuItem>
+              <MenuItem value={2}>2nd Year</MenuItem>
+              <MenuItem value={3}>3rd Year</MenuItem>
+              <MenuItem value={4}>4th Year</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-dialog-select-label">Branch</InputLabel>
+            <Select
+              labelId="demo-dialog-select-label"
+              id="demo-dialog-select"
+              value={branch}
+              name="branch"
+              onChange={handleChange}
+              input={<OutlinedInput label="Branch" />}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="Computer Science and Engineering">
+                Computer Science and Engineering
+              </MenuItem>
+              <MenuItem value="Mechanical Engineering">Mechanical Engineering</MenuItem>
+              <MenuItem value="Electrical Engineering">Electrical Engineering</MenuItem>
+              <MenuItem value="Information Technology">Information Technology</MenuItem>
+              <MenuItem value="Civil Engineering">Civil Engineering</MenuItem>
+              <MenuItem value="Electronics and Communication Engineering">
+                Electronics and Communication Engineering
+              </MenuItem>
+              <MenuItem value="Electronics and Instrumation">Electronics and Instrumation</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel htmlFor="grouped-select">Subject</InputLabel>
+            <Select
+              defaultValue=""
+              id="grouped-select"
+              label="Grouping"
+              value={subject}
+              onChange={handleChange}
+              name="subject"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <ListSubheader>Computer Science and Engineering</ListSubheader>
+              <MenuItem value="Operating Systems">Operating Systems</MenuItem>
+              <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
+              <ListSubheader>Mechanical Engineering</ListSubheader>
+              <MenuItem value={3}>Subject 1</MenuItem>
+              <MenuItem value={4}>Subject 2</MenuItem>
+              <ListSubheader>Electrical Engineering</ListSubheader>
+              <MenuItem value={3}>Subject 1</MenuItem>
+              <MenuItem value={4}>Subject 2</MenuItem>
+              <ListSubheader>Information Technology</ListSubheader>
+              <MenuItem value={3}>Subject 1</MenuItem>
+              <MenuItem value={4}>Subject 2</MenuItem>
+              <ListSubheader>Civil Engineering</ListSubheader>
+              <MenuItem value={3}>Subject 1</MenuItem>
+              <MenuItem value={4}>Subject 2</MenuItem>
+              <ListSubheader>Electronics and Communication Engineering</ListSubheader>
+              <MenuItem value={3}>Subject 1</MenuItem>
+              <MenuItem value={4}>Subject 2</MenuItem>
+              <ListSubheader>Electronics and Instrumation</ListSubheader>
+              <MenuItem value={3}>Subject 1</MenuItem>
+              <MenuItem value={4}>Subject 2</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </div>
+    );
+  }
   const handleSearch = async () => {
+    console.log(year, branch, subject);
     const res = await searchPosts(branch, year, subject);
     setPosts(res);
     setLoading(false);
@@ -140,7 +249,7 @@ export default function Board() {
         </Stack>
 
         <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          <SelectBoard setB={setBranch} setY={setYear} setS={setSubject} />
+          <SelectBoard />
           <Button variant="contained" onClick={handleSearch}>
             Search
           </Button>
@@ -155,8 +264,7 @@ export default function Board() {
                     <CircularProgress />
                   ) : (
                     posts.map((row) => {
-                      const { _id, author, title, subject, creationDate, votes, comments, text } =
-                        row;
+                      const { _id, author, title, subject, year, creationDate, votes } = row;
                       return (
                         <TableRow hover key={_id} tabIndex={-1}>
                           <TableCell align="left">
@@ -202,6 +310,17 @@ export default function Board() {
                     <TableRow>
                       <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
                         <CircularProgress />
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                )}
+                {posts && posts.length === 0 && (
+                  <TableBody>
+                    <TableRow>
+                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
+                        <Typography>
+                          No results found for Branch: {branch} Year: {year} Subject: {subject}
+                        </Typography>
                       </TableCell>
                     </TableRow>
                   </TableBody>

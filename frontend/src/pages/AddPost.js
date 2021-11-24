@@ -62,6 +62,7 @@ export default function AddPost() {
       .catch((err) => console.log(err));
     setIsSubmitting(false);
     setOpen(false);
+    window.location.reload();
   };
 
   const handleClickOpen = () => {
@@ -113,13 +114,19 @@ export default function AddPost() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value="CSE">Computer Science and Engineering</MenuItem>
-                <MenuItem value="ME">Mechanical Engineering</MenuItem>
-                <MenuItem value="EE">Electrical Engineering</MenuItem>
-                <MenuItem value="IT">Information Technology</MenuItem>
-                <MenuItem value="CE">Civil Engineering</MenuItem>
-                <MenuItem value="ECE">Electronics and Communication Engineering</MenuItem>
-                <MenuItem value="EI">Electronics and Instrumation</MenuItem>
+                <MenuItem value="Computer Science and Engineering">
+                  Computer Science and Engineering
+                </MenuItem>
+                <MenuItem value="Mechanical Engineering">Mechanical Engineering</MenuItem>
+                <MenuItem value="Electrical Engineering">Electrical Engineering</MenuItem>
+                <MenuItem value="Information Technology">Information Technology</MenuItem>
+                <MenuItem value="Civil Engineering">Civil Engineering</MenuItem>
+                <MenuItem value="Electronics and Communication Engineering">
+                  Electronics and Communication Engineering
+                </MenuItem>
+                <MenuItem value="Electronics and Instrumation">
+                  Electronics and Instrumation
+                </MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -136,8 +143,8 @@ export default function AddPost() {
                   <em>None</em>
                 </MenuItem>
                 <ListSubheader>Computer Science and Engineering</ListSubheader>
-                <MenuItem value="OS">Operating Systems</MenuItem>
-                <MenuItem value="AA">Advanced Algorithms</MenuItem>
+                <MenuItem value="Operating Systems">Operating Systems</MenuItem>
+                <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
                 <ListSubheader>Mechanical Engineering</ListSubheader>
                 <MenuItem value="S1">Subject 1</MenuItem>
                 <MenuItem value="S2">Subject 2</MenuItem>

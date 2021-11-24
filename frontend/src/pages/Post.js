@@ -47,7 +47,7 @@ export default function Post() {
           <ul style={{ listStyleType: 'none' }}>
             {comments.map((text) => (
               <li>
-                <h4>{text.author}:</h4>
+                <b>{text.author}:</b> &nbsp;
                 {text.comment}
               </li>
             ))}

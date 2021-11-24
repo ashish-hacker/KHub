@@ -18,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use(fileUpload());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
 app.get('/', (req, res) => res.send("hi"));
 
 

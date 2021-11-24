@@ -23,25 +23,128 @@ router.get('/', async (req, res) => {
 
 // Query
 router.get('/search', (req, res) => {
-    console.log(req.body);
-    // if (!req.body.branch || !req.body.year || !req.body.subject) {
-    //     res.status(400).send("Include branch, year & subject!");
-    //     return;
-    // }
-    try {
-        posts.find({
-            branch: req.body.branch ? req.body.branch: "CSE",
-            year: req.body.year ? req.body.year: 4,
-            subject: req.body.subject ? req.body.subject: "AA"
-        }, (err, postList) => {
-            if (err) {
-                res.sendStatus(400);
-            }
-            res.status(200).json(postList);
-        })
-    } catch (err) {
-        console.log(err);
+    console.log(req.query);
+    const yr = req.body.year || req.query.year;
+    const sub = req.body.subject || req.query.subject;
+    const b = req.body.branch || req.query.branch;
+    if (b !== '' && yr !== '0' && yr !== '' && sub !== '') {
+        console.log(req.query);
+        try {
+            posts.find({
+                year: yr,
+                subject: sub,
+                branch: b
+            }, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
     }
+    else if (b === '' && (yr === '0' || yr === '') && sub === '') {
+        try {
+            posts.find({}, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
+    }
+    else if (b === '' && yr !== '0' && yr !== '' && sub !== '') {
+        try {
+            posts.find({
+                year: parseInt(yr, 10),
+                subject: sub
+            }, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
+    }
+    else if (b !== '' && (yr === '0' || yr === '') && sub !== '') {
+        try {
+            posts.find({
+                branch: b,
+                subject: sub
+            }, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
+    }
+    else if (b === '' && yr !== '0' && yr !== '' && sub === '') {
+        try {
+            posts.find({
+                year: parseInt(yr, 10),
+            }, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
+    }
+    else if (b !== '' && yr !== '0' && yr!=='' && sub === '') {
+        try {
+            posts.find({
+                year: parseInt(yr, 10),
+                branch: b
+            }, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
+    } else if (b !== '' && (yr === '0' || yr === '') && sub === '') {
+        try {
+            posts.find({
+                branch: b
+            }, (err, postList) => {
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(400);
+                }
+                res.status(200).json(postList);
+            })
+        } catch (err) {
+            console.log(err);
+            // res.status(400).send("Include branch, year & subject!");
+        }
+    } else {
+        res.sendStatus(400);
+    }
+    
 });
 
 // Get single Post

@@ -1,10 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
@@ -66,13 +61,17 @@ export default function SelectBoard({ setY, setB, setS }) {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value="CSE">Computer Science and Engineering</MenuItem>
-            <MenuItem value="ME">Mechanical Engineering</MenuItem>
-            <MenuItem value="EE">Electrical Engineering</MenuItem>
-            <MenuItem value="IT">Information Technology</MenuItem>
-            <MenuItem value="CE">Civil Engineering</MenuItem>
-            <MenuItem value="ECE">Electronics and Communication Engineering</MenuItem>
-            <MenuItem value="EI">Electronics and Instrumation</MenuItem>
+            <MenuItem value="Computer Science and Engineering">
+              Computer Science and Engineering
+            </MenuItem>
+            <MenuItem value="Mechanical Engineering">Mechanical Engineering</MenuItem>
+            <MenuItem value="Electrical Engineering">Electrical Engineering</MenuItem>
+            <MenuItem value="Information Technology">Information Technology</MenuItem>
+            <MenuItem value="Civil Engineering">Civil Engineering</MenuItem>
+            <MenuItem value="Electronics and Communication Engineering">
+              Electronics and Communication Engineering
+            </MenuItem>
+            <MenuItem value="Electronics and Instrumation">Electronics and Instrumation</MenuItem>
           </Select>
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -88,8 +87,8 @@ export default function SelectBoard({ setY, setB, setS }) {
               <em>None</em>
             </MenuItem>
             <ListSubheader>Computer Science and Engineering</ListSubheader>
-            <MenuItem value={1}>Operating Systems</MenuItem>
-            <MenuItem value={2}>Advanced Algorithms</MenuItem>
+            <MenuItem value="Operating Systems">Operating Systems</MenuItem>
+            <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
             <ListSubheader>Mechanical Engineering</ListSubheader>
             <MenuItem value={3}>Subject 1</MenuItem>
             <MenuItem value={4}>Subject 2</MenuItem>

@@ -47,6 +47,10 @@ export default function Router() {
           element: <NewResource />
         }
       ]
+    },
+    {
+      path: '*',
+      element: <NotFound />
     }
   ]);
 }
