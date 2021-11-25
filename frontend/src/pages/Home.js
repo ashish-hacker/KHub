@@ -7,6 +7,8 @@ import axios from 'axios';
 // components
 import Page from '../components/Page';
 import account from '../_mocks_/account';
+
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {

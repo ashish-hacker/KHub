@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {

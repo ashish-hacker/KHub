@@ -4,6 +4,8 @@ import axios from 'axios';
 import CheckIcon from '@mui/icons-material/Check';
 import Button from '@mui/material/Button';
 
+require('dotenv').config();
+
 Approve.propTypes = {
   filename: PropTypes.string,
   arr: PropTypes.array

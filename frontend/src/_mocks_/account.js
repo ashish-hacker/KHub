@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------------
-
 import axios from 'axios';
+
+require('dotenv').config();
 
 const fetchUser = async () => {
   const res = await axios

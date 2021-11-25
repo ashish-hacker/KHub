@@ -17,6 +17,8 @@ import { LoadingButton } from '@mui/lab';
 import { Stack } from '@mui/material';
 import axios from 'axios';
 
+require('dotenv').config();
+
 export default function AddPost() {
   const [open, setOpen] = React.useState(false);
   const [yearN, setYear] = React.useState('');

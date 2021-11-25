@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Delete from './DeletePost';
 
+require('dotenv').config();
+
 export default function BasicCard({ row }) {
   const { _id, author, title, text, subject, votes } = row;
   const isAdmin = localStorage.getItem('is_admin') === 'true';

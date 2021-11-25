@@ -10,6 +10,7 @@ import { MHidden } from '../components/@material-extend';
 import { RegisterForm } from '../components/authentication/register';
 import AuthSocial from '../components/authentication/AuthSocial';
 
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({

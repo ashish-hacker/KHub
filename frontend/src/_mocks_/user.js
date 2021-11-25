@@ -1,6 +1,8 @@
 import faker from 'faker';
 // utils
 import { mockImgAvatar } from '../utils/mockImages';
+
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 const getList = async () => {

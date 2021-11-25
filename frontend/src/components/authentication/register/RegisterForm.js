@@ -10,6 +10,8 @@ import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import axios from 'axios';
 
+require('dotenv').config();
+
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {

@@ -5,6 +5,8 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Stack, Typography } from '@mui/material';
 import authware from '../../../authware';
 
+require('dotenv').config();
+
 ChangeVote.propTypes = {
   fname: PropTypes.string,
   username: PropTypes.string,

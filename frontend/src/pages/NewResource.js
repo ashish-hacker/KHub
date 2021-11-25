@@ -16,6 +16,7 @@ import Page from '../components/Page';
 // const { BlobServiceClient } = require('@azure/storage-blob');
 
 // ----------------------------------------------------------------------
+require('dotenv').config();
 
 const RootStyle = styled(Page)(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -76,16 +77,20 @@ export default function NewResc(votes) {
     formData.append('is_admin', localStorage.getItem('is_admin'));
     formData.append('votes', votes);
     try {
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: (progressEvent) => {
-          setUploadPercentage(
-            parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total), 10)
-          );
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/upload`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          onUploadProgress: (progressEvent) => {
+            setUploadPercentage(
+              parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total), 10)
+            );
+          }
         }
-      });
+      );
       console.log(res);
     } catch (err) {
       console.log(err);

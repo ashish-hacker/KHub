@@ -9,6 +9,8 @@ import aiStatusRejected from '@iconify/icons-carbon/ai-status-rejected';
 // material
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 import axios from 'axios';
+
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 export default function UserMoreMenu(props) {

@@ -42,7 +42,7 @@ import ChangeVote from '../components/_dashboard/Hub/ChangeVote';
 // utils
 import { mockImgAvatar } from '../utils/mockImages';
 //
-
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD_REV = [

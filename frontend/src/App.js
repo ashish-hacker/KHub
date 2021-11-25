@@ -7,6 +7,7 @@ import GlobalStyles from './theme/globalStyles';
 import ScrollToTop from './components/ScrollToTop';
 import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
 
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 export default function App() {

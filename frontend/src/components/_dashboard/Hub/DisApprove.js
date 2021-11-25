@@ -4,6 +4,8 @@ import axios from 'axios';
 import ClearIcon from '@mui/icons-material/Clear';
 import Button from '@mui/material/Button';
 
+require('dotenv').config();
+
 DisApprove.propTypes = {
   filename: PropTypes.string
 };

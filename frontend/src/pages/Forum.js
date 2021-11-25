@@ -41,7 +41,7 @@ import Post from './AddPost';
 // import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../components/_dashboard/forum';
 //
 // import POSTS from '../_mocks_/blog';
-
+require('dotenv').config();
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [

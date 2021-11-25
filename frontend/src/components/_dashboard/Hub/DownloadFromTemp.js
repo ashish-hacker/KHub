@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 
+require('dotenv').config();
+
 export default function DownloadFromTemp({ filename }) {
   const handleDownloadTemp = async (e) => {
     e.preventDefault();
