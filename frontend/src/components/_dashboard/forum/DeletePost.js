@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Button from '@mui/material/Button';
 
 export default function DeletePost({ id, posts }) {
   const handleDelete = async (e) => {
@@ -18,5 +19,9 @@ export default function DeletePost({ id, posts }) {
     window.location.reload();
     alert('Post Deleted Successfully');
   };
-  return <DeleteOutlineIcon onClick={handleDelete} />;
+  return (
+    <Button color="error">
+      <DeleteOutlineIcon onClick={handleDelete} />
+    </Button>
+  );
 }

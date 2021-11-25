@@ -45,7 +45,7 @@ import Post from './AddPost';
 const TABLE_HEAD = [
   { id: 'name', label: 'Author', alignRight: false },
   { id: 'Title', label: 'Title', alignRight: false },
-  { id: 'Related Subject', label: 'Topic', alignRight: false },
+  { id: 'Related Subject', label: 'Subject', alignRight: false },
   { id: 'Upload Date', label: 'Uploaded on', alignRight: false },
   { id: 'Votes', label: 'Votes', alignRight: false }
 ];

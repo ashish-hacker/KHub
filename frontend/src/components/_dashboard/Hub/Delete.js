@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Button from '@mui/material/Button';
 
 Delete.propTypes = {
   filename: PropTypes.string,
@@ -24,5 +25,9 @@ export default function Delete({ filename, arr }) {
     window.location.reload();
     alert('Deleted Successfully');
   };
-  return <DeleteOutlineIcon onClick={handleDelete} />;
+  return (
+    <Button color="error">
+      <DeleteOutlineIcon onClick={handleDelete} />
+    </Button>
+  );
 }

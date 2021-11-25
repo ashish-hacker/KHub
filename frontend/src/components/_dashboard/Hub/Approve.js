@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import CheckIcon from '@mui/icons-material/Check';
+import Button from '@mui/material/Button';
 
 Approve.propTypes = {
   filename: PropTypes.string,
@@ -27,5 +28,9 @@ export default function Approve({ filename, arr }) {
       console.log(err);
     }
   };
-  return <CheckIcon onClick={handleApprove} style={{ hover: 'pointer' }} />;
+  return (
+    <Button>
+      <CheckIcon onClick={handleApprove} style={{ hover: 'pointer' }} />
+    </Button>
+  );
 }

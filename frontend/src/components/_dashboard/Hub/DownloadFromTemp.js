@@ -21,7 +21,7 @@ export default function DownloadFromTemp({ filename }) {
     }
   };
   return (
-    <a href="#" onClick={handleDownloadTemp} style={{ textDecoration: 'none', color: 'black' }}>
+    <a href="#" onClick={handleDownloadTemp} style={{ color: 'black' }}>
       {filename}
     </a>
   );

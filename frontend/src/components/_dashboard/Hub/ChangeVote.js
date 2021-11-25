@@ -42,9 +42,13 @@ export default function ChangeVote({ fname, username, topicName, votes }) {
 
   return (
     <Stack direction="column" alignItems="center" spacing={2}>
-      <ArrowDropUpIcon onClick={upvote} fontSize="large" style={{ ':hover': 'pointer' }} />
+      <a href="#" style={{ color: 'black' }}>
+        <ArrowDropUpIcon onClick={upvote} fontSize="large" />
+      </a>
       <Typography>{vote}</Typography>
-      <ArrowDropDownIcon onClick={downvote} fontSize="large" />
+      <a href="#" style={{ color: 'black' }}>
+        <ArrowDropDownIcon onClick={downvote} fontSize="large" />
+      </a>
     </Stack>
   );
 }

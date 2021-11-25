@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import ClearIcon from '@mui/icons-material/Clear';
+import Button from '@mui/material/Button';
 
 DisApprove.propTypes = {
   filename: PropTypes.string
@@ -24,5 +25,9 @@ export default function DisApprove({ filename }) {
     }
   };
 
-  return <ClearIcon onClick={handleDisApprove} />;
+  return (
+    <Button color="error">
+      <ClearIcon onClick={handleDisApprove} />
+    </Button>
+  );
 }
