@@ -96,7 +96,7 @@ export default function NewResc(votes) {
       console.log(err);
     }
     navigate('/hub', { replace: true });
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

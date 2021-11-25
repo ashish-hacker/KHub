@@ -10,7 +10,7 @@ async function uploadData(props) {
     // console.log(props);
     const blobName = props.files.file.name;
     let blockBlobClient;
-    if (props.body.is_admin) {
+    if (props.body.is_admin === 'true') {
         blockBlobClient = mainContainerClient.getBlockBlobClient(blobName);
     } else {
         blockBlobClient = containerClient.getBlockBlobClient(blobName);

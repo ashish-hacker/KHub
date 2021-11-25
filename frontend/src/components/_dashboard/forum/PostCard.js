@@ -65,8 +65,8 @@ export default function BasicCard({ row }) {
             &nbsp; Read More &nbsp;
           </RouterLink>
         </Button>
-        <Vote id={_id} />
-        {isAdmin && <Delete id={_id} votes={votes} />}
+        <Vote id={_id} votes={votes} />
+        {isAdmin && <Delete id={_id} />}
       </CardActions>
     </Card>
   );
