@@ -7,6 +7,7 @@ const { API_PORT } = process.env;
 const PORT = process.env.PORT || API_PORT;
 
 if (process.env.NODE_ENV === "production") {
+    console.log("In Production!");
     app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
     app.get("*", (req, res) => {
