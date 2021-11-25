@@ -1,0 +1,26 @@
+{
+  "name": "khub",
+  "version": "1.0.0",
+  "description": "All in one hub for useful resources and QnAs for students.",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.4.0"
+  },
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "server": "cd backend && npm run server",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run frontend\"",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashish-hacker/KHub.git"
+  },
+  "author": "Ashish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashish-hacker/KHub/issues"
+  },
+  "homepage": "https://github.com/ashish-hacker/KHub#readme"
+}
