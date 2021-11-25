@@ -76,7 +76,7 @@ export default function NewResc(votes) {
     formData.append('is_admin', localStorage.getItem('is_admin'));
     formData.append('votes', votes);
     try {
-      const res = await axios.post(`${process.env.BACKEND_ENDPOINT}/api/hub/upload`, formData, {
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },

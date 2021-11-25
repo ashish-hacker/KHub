@@ -57,7 +57,7 @@ export default function AddPost() {
       title: topicN
     };
     await axios
-      .post(`${process.env.BACKEND_ENDPOINT}/api/posts`, reqBody)
+      .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/posts`, reqBody)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     setIsSubmitting(false);

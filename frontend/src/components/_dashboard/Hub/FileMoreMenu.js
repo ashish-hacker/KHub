@@ -77,7 +77,7 @@ export default function UserMoreMenu(props) {
     };
     try {
       await axios
-        .post('/api/hub/move', {
+        .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/move`, {
           token: tok,
           name: props.name
         })
@@ -94,7 +94,7 @@ export default function UserMoreMenu(props) {
     const t = localStorage.getItem('jwt');
     try {
       await axios
-        .delete(`${process.env.BACKEND_ENDPOINT}/api/hub/deleteReview?name=${props.name}`, {
+        .delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/deleteReview?name=${props.name}`, {
           token: t
         })
         .then((res) => console.log(res.data))

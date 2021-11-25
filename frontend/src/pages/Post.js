@@ -19,7 +19,7 @@ export default function Post() {
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
-    const res = await axios.get(`${process.env.BACKEND_ENDPOINT}/api/posts/searchOne?id=${id}`);
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/posts/searchOne?id=${id}`);
     setAuthor(res.data.author);
     setTitle(res.data.title);
     setText(res.data.text);

@@ -9,7 +9,10 @@ export default function DownloadFromMain({ filename }) {
       const tok = {
         token: localStorage.getItem('jwt')
       };
-      const res = await axios.get(`${process.env.BACKEND_ENDPOINT}/api/hub/download?name=${filename}`, tok);
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/download?name=${filename}`,
+        tok
+      );
       const url = res.data;
       const a = document.createElement('a');
       a.setAttribute('download', filename);

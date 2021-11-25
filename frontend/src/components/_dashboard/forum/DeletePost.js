@@ -9,7 +9,7 @@ export default function DeletePost({ id }) {
     const t = localStorage.getItem('jwt');
     try {
       await axios
-        .delete(`${process.env.BACKEND_ENDPOINT}/api/posts/delete/${id}`)
+        .delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/posts/delete/${id}`)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
       // window.location.reload();

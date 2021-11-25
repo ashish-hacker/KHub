@@ -4,7 +4,11 @@ import axios from 'axios';
 
 const fetchUser = async () => {
   const res = await axios
-    .get(`${process.env.BACKEND_ENDPOINT}/api/fetchUser?email=${localStorage.getItem('email')}`)
+    .get(
+      `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/fetchUser?email=${localStorage.getItem(
+        'email'
+      )}`
+    )
     .then((res) => res)
     .then((data) => data);
   // console.log(res);

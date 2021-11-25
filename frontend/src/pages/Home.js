@@ -15,7 +15,7 @@ export default function DashboardApp() {
   useEffect(() => {
     try {
       axios
-        .post(`${process.env.BACKEND_ENDPOINT}/api/home/access`, {
+        .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/home/access`, {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {

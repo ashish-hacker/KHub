@@ -40,7 +40,7 @@ export default function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       axios
-        .post(`${process.env.BACKEND_ENDPOINT}/auth/login/student`, {
+        .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/auth/login/student`, {
           email: values.email,
           password: values.password
         })
