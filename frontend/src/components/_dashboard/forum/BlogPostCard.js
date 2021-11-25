@@ -61,12 +61,13 @@ BlogPostCard.propTypes = {
 };
 
 export default function BlogPostCard({ post, index }) {
+  // _id, author, title, subject, year, creationDate, votes
   const { cover, title, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
 
   const POST_INFO = [
-    { number: comment, icon: messageCircleFill },
+    { number: comments.length, icon: messageCircleFill },
     { number: view, icon: eyeFill },
     { number: share, icon: shareFill }
   ];
@@ -108,8 +109,8 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
           <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
+            alt={author}
+            src=""
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
@@ -121,7 +122,7 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
 
-          <CoverImgStyle alt={title} src={cover} />
+          <CoverImgStyle alt={title} src="" />
         </CardMediaStyle>
 
         <CardContent
@@ -147,7 +148,6 @@ export default function BlogPostCard({ post, index }) {
             color="inherit"
             variant="subtitle2"
             underline="hover"
-            component={RouterLink}
             sx={{
               ...(latestPostLarge && { typography: 'h5', height: 60 }),
               ...((latestPostLarge || latestPost) && {
@@ -155,7 +155,14 @@ export default function BlogPostCard({ post, index }) {
               })
             }}
           >
-            {title}
+            <RouterLink
+              to={{
+                pathname: `/forum/post/${_id}`
+              }}
+              style={{ color: 'black' }}
+            >
+              {title}
+            </RouterLink>
           </TitleStyle>
 
           <InfoStyle>

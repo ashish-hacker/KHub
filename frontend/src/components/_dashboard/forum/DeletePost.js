@@ -3,7 +3,7 @@ import axios from 'axios';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Button from '@mui/material/Button';
 
-export default function DeletePost({ id, posts }) {
+export default function DeletePost({ id }) {
   const handleDelete = async (e) => {
     e.preventDefault();
     const t = localStorage.getItem('jwt');

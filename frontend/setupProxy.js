@@ -4,7 +4,7 @@ module.exports = (app) => {
   app.use(
     ['/api', '/auth'],
     createProxyMiddleware({
-      target: 'http://localhost:4001'
+      target: 'https://khub-service.herokuapp.com/'
     })
   );
 };

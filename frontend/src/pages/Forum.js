@@ -24,10 +24,12 @@ import {
   Table,
   CircularProgress
 } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 // components
 import Page from '../components/Page';
+import PostCard from '../components/_dashboard/forum/PostCard';
 import Delete from '../components/_dashboard/forum/DeletePost';
 // import SelectBoard from '../components/_dashboard/forum/SelectBoard';
 import TableHead from '../components/_dashboard/Hub/FileListHead';
@@ -254,81 +256,22 @@ export default function Board() {
             Search
           </Button>
         </Stack>
-        <Card>
-          <Scrollbar>
-            <TableContainer sx={{ minWidth: 500 }}>
-              <Table>
-                <TableHead headLabel={TABLE_HEAD} />
-                <TableBody>
-                  {!posts ? (
-                    <CircularProgress />
-                  ) : (
-                    posts.map((row) => {
-                      const { _id, author, title, subject, year, creationDate, votes } = row;
-                      return (
-                        <TableRow hover key={_id} tabIndex={-1}>
-                          <TableCell align="left">
-                            <Typography variant="subtitle2" noWrap>
-                              {author}
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="left">
-                            <RouterLink
-                              to={{
-                                pathname: `/forum/post/${_id}`
-                              }}
-                              style={{ color: 'black' }}
-                            >
-                              {title}
-                            </RouterLink>
-                          </TableCell>
-                          <TableCell align="left">
-                            <Typography variant="subtitle2" noWrap>
-                              {subject}
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="left">
-                            <Typography variant="subtitle2" noWrap>
-                              {creationDate}
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="center">
-                            <Vote votes={votes} id={_id} />
-                          </TableCell>
-                          {isAdmin && (
-                            <TableCell align="right">
-                              <Delete id={_id} posts={posts} />
-                            </TableCell>
-                          )}
-                        </TableRow>
-                      );
-                    })
-                  )}
-                </TableBody>
-                {loading && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <CircularProgress />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-                {posts && !loading && posts.length === 0 && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <Typography>
-                          No results found for Branch: {branch} Year: {year} Subject: {subject}
-                        </Typography>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )}
-              </Table>
-            </TableContainer>
-          </Scrollbar>
-        </Card>
+        <Container align="center">
+          {loading && <CircularProgress />}
+          <Container align="center" sx={{ minWidth: 500 }}>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              {!posts ? (
+                <div>Hello!</div>
+              ) : (
+                posts.map((row) => (
+                  <Grid item xs={2} sm={4} md={4} key={row._id}>
+                    <PostCard row={row} />
+                  </Grid>
+                ))
+              )}
+            </Grid>
+          </Container>
+        </Container>
       </Container>
     </Page>
   );
