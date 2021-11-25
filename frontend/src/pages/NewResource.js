@@ -73,6 +73,7 @@ export default function NewResc(votes) {
     formData.append('author', author);
     formData.append('topic', tag);
     formData.append('file', file);
+    formData.append('is_admin', localStorage.getItem('is_admin'));
     formData.append('votes', votes);
     try {
       const res = await axios.post('http://localhost:4001/api/hub/upload', formData, {

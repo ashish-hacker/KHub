@@ -1,4 +1,5 @@
 const containerClient = require('./getReviewContainer');
+const mainContainerClient = require('./createContainer');
 const express = require('express');
 
 const router = express.Router();
@@ -8,7 +9,12 @@ const router = express.Router();
 async function uploadData(props) {
     // console.log(props);
     const blobName = props.files.file.name;
-    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    let blockBlobClient;
+    if (props.body.is_admin) {
+        blockBlobClient = mainContainerClient.getBlockBlobClient(blobName);
+    } else {
+        blockBlobClient = containerClient.getBlockBlobClient(blobName);
+    }
     let uploadBlobResponse;
     try {
         uploadBlobResponse = await blockBlobClient.uploadData(props.files.file.data);

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 export default function DownloadFromTemp({ filename }) {
   const handleDownloadTemp = async (e) => {
@@ -20,9 +21,5 @@ export default function DownloadFromTemp({ filename }) {
       console.log(err);
     }
   };
-  return (
-    <a href="#" onClick={handleDownloadTemp} style={{ color: 'black' }}>
-      {filename}
-    </a>
-  );
+  return <Button onClick={handleDownloadTemp}>{filename}</Button>;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Button from '@mui/material/Button';
 
 export default function DownloadFromMain({ filename }) {
   const handleDownload = async (e) => {
@@ -20,9 +21,5 @@ export default function DownloadFromMain({ filename }) {
       console.log(err);
     }
   };
-  return (
-    <a href="#" onClick={handleDownload} style={{ color: 'black' }}>
-      {filename}
-    </a>
-  );
+  return <Button onClick={handleDownload}>{filename}</Button>;
 }
