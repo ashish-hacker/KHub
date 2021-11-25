@@ -3,8 +3,7 @@ const path = require("path");
 const app = require("./app");
 require("dotenv").config("./config.env");
 
-const { API_PORT } = process.env;
-const PORT = process.env.PORT || API_PORT;
+const PORT = process.env.PORT || 4001;
 
 if (process.env.NODE_ENV === "production") {
     console.log("In Production!");

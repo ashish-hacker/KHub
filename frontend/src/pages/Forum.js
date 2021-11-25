@@ -314,7 +314,7 @@ export default function Board() {
                     </TableRow>
                   </TableBody>
                 )}
-                {posts && posts.length === 0 && (
+                {posts && !loading && posts.length === 0 && (
                   <TableBody>
                     <TableRow>
                       <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
