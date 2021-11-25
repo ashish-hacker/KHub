@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "backend of KHub",
   "main": "index.js",
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "start": "node index",
     "server": "nodemon index",
