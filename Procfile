@@ -1,1 +1,1 @@
-web: nodemon backend/index.js
+web: nodemon ./backend/index.js
