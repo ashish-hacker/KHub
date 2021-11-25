@@ -41,7 +41,7 @@ export default function AddPost({ id }) {
       comment: textContent
     };
     await axios
-      .put(`/api/posts/comment/${id}`, reqBody)
+      .put(`${process.env.BACKEND_ENDPOINT}/api/posts/comment/${id}`, reqBody)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     setIsSubmitting(false);

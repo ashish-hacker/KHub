@@ -5,7 +5,7 @@ import { mockImgAvatar } from '../utils/mockImages';
 
 const getList = async () => {
   const blobs = [];
-  await fetch('http://localhost:4001/api/hub/list')
+  await fetch(`${process.env.BACKEND_ENDPOINT}/api/hub/list`)
     .then((res) => res.json())
     .then((data) => {
       data.map((blob) => {

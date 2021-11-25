@@ -17,7 +17,7 @@ export default function Approve({ filename, arr }) {
     };
     try {
       await axios
-        .post('/api/hub/move', {
+        .post(`${process.env.BACKEND_ENDPOINT}/api/hub/move`, {
           token: tok,
           name: filename
         })

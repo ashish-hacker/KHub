@@ -15,7 +15,7 @@ export default function Delete({ filename, arr }) {
     const t = localStorage.getItem('jwt');
     try {
       await axios
-        .delete(`/api/hub/delete?name=${filename}&token=${t}`)
+        .delete(`${process.env.BACKEND_ENDPOINT}/api/hub/delete?name=${filename}&token=${t}`)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
       // window.location.reload();

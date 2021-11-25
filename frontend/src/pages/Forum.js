@@ -62,13 +62,13 @@ function Vote({ votes, id }) {
 
   const upvote = async () => {
     setVote(vote + 1);
-    await axios.put(`/api/posts/vote/${id}`, {
+    await axios.put(`${process.env.BACKEND_ENDPOINT}/api/posts/vote/${id}`, {
       votes: vote
     });
   };
   const downvote = async () => {
     setVote(vote - 1);
-    await axios.put(`/api/posts/vote/${id}`, {
+    await axios.put(`${process.env.BACKEND_ENDPOINT}/api/posts/vote/${id}`, {
       votes: vote
     });
   };
@@ -110,7 +110,7 @@ export default function Board() {
   useEffect(() => {
     try {
       axios
-        .post('https://khub-service.herokuapp.com/api/forum/access', {
+        .post(`${BACKEND_ENDPOINT}/api/forum/access`, {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {

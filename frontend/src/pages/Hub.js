@@ -112,7 +112,7 @@ export default function User() {
   useEffect(async () => {
     try {
       await axios
-        .post('https://khub-service.herokuapp.com/api/hub/access', {
+        .post(`${process.env.BACKEND_ENDPOINT}/api/hub/access`, {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {
@@ -148,7 +148,7 @@ export default function User() {
       return;
     }
     const mode = 'get';
-    const endpoint = '/api/hub/listReview';
+    const endpoint = `${process.env.BACKEND_ENDPOINT}/api/hub/listReview`;
     const reqBody = {
       token: ''
     };
@@ -227,7 +227,7 @@ export default function User() {
   const sendQuery = async () => {
     try {
       await axios
-        .post('/api/hub/search', {
+        .post(`${process.env.BACKEND_ENDPOINT}/api/hub/search`, {
           q: filterName,
           top: 20,
           skip: 0,

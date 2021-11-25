@@ -40,7 +40,7 @@ export default function UserMoreMenu(props) {
       const tok = {
         token: localStorage.getItem('jwt')
       };
-      const res = await axios.post(`/api/hub/downloadTemp?name=${props.name}`, tok);
+      const res = await axios.post(`${process.env.BACKEND_ENDPOINT}/api/hub/downloadTemp?name=${props.name}`, tok);
       const url = res.data;
       const a = document.createElement('a');
       a.setAttribute('download', props.name);
@@ -59,7 +59,7 @@ export default function UserMoreMenu(props) {
     const t = localStorage.getItem('jwt');
     try {
       await axios
-        .delete(`/api/hub/delete?name=${props.name}&token=${t}`)
+        .delete(`${process.env.BACKEND_ENDPOINT}/api/hub/delete?name=${props.name}&token=${t}`)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err));
       // window.location.reload();
@@ -94,7 +94,7 @@ export default function UserMoreMenu(props) {
     const t = localStorage.getItem('jwt');
     try {
       await axios
-        .delete(`/api/hub/deleteReview?name=${props.name}`, {
+        .delete(`${process.env.BACKEND_ENDPOINT}/api/hub/deleteReview?name=${props.name}`, {
           token: t
         })
         .then((res) => console.log(res.data))

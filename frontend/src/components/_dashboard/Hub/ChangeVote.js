@@ -28,7 +28,7 @@ export default function ChangeVote({ fname, username, topicName, votes }) {
     setVote(vote + 1);
   };
   const downvote = async () => {
-    const endpoint = '/api/hub/changeVotes';
+    const endpoint = `${process.env.BACKEND_ENDPOINT}/api/hub/changeVotes`;
     const mode = 'post';
     const req = {
       filename: fname,

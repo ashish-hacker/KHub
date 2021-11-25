@@ -40,7 +40,7 @@ export default function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       axios
-        .post('https://khub-service.herokuapp.com/auth/login/student', {
+        .post(`${process.env.BACKEND_ENDPOINT}/auth/login/student`, {
           email: values.email,
           password: values.password
         })

@@ -14,7 +14,7 @@ export default function DisApprove({ filename }) {
     const t = localStorage.getItem('jwt');
     try {
       await axios
-        .delete(`/api/hub/deleteReview?name=${filename}`, {
+        .delete(`${process.env.BACKEND_ENDPOINT}/api/hub/deleteReview?name=${filename}`, {
           token: t
         })
         .then((res) => console.log(res.data))

@@ -19,14 +19,14 @@ export default function BasicCard({ row }) {
 
   const upvote = async () => {
     setVote(vote + 1);
-    await axios.put(`/api/posts/vote/${_id}`, {
+    await axios.put(`${process.env.BACKEND_ENDPOINT}/api/posts/vote/${_id}`, {
       votes: vote + 1
     });
   };
 
   const downvote = async () => {
     setVote(vote - 1);
-    await axios.put(`/api/posts/vote/${_id}`, {
+    await axios.put(`${process.env.BACKEND_ENDPOINT}/api/posts/vote/${_id}`, {
       votes: vote
     });
   };

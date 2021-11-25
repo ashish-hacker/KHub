@@ -31,7 +31,7 @@ export default function RegisterForm() {
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
       axios
-        .post('http://localhost:4001/auth/register/student', {
+        .post(`${process.env.BACKEND_ENDPOINT}/auth/register/student`, {
           name: values.name,
           email: values.email,
           password: values.password

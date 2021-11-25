@@ -15,7 +15,7 @@ export default function DashboardApp() {
   useEffect(() => {
     try {
       axios
-        .post('https://khub-service.herokuapp.com/api/home/access', {
+        .post(`${process.env.BACKEND_ENDPOINT}/api/home/access`, {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {
