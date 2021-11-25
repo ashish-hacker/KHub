@@ -112,7 +112,7 @@ export default function User() {
   useEffect(async () => {
     try {
       await axios
-        .post('/api/hub/access', {
+        .post('https://khub-service.herokuapp.com/api/hub/access', {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {

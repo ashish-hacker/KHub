@@ -110,7 +110,7 @@ export default function Board() {
   useEffect(() => {
     try {
       axios
-        .post('/api/forum/access', {
+        .post('https://khub-service.herokuapp.com/api/forum/access', {
           token: localStorage.getItem('jwt')
         })
         .then((res) => {
