@@ -11,8 +11,7 @@
     "start": "node index",
     "server": "nodemon index",
     "frontend": "cd ../frontend && npm run start",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\" ",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix ../frontend && npm run build --prefix ../frontend"
+    "dev": "concurrently \"npm run server\" \"npm run frontend\" "
   },
   "author": "Ashish",
   "license": "ISC",
