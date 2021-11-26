@@ -66,7 +66,7 @@ export default function BasicCard({ row }) {
           </RouterLink>
         </Button>
         <Vote id={_id} votes={votes} />
-        {isAdmin && <Delete id={_id} />}
+        {isAdmin ? <Delete id={_id} /> : <div />}
       </CardActions>
     </Card>
   );

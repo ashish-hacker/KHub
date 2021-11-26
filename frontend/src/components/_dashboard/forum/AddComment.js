@@ -1,5 +1,6 @@
 //  react
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -34,7 +35,6 @@ export default function AddPost({ id }) {
       setText(val);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -48,7 +48,7 @@ export default function AddPost({ id }) {
       .catch((err) => console.log(err));
     setIsSubmitting(false);
     setOpen(false);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleClickOpen = () => {

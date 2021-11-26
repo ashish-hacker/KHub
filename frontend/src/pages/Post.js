@@ -32,32 +32,33 @@ export default function Post() {
   // { id , author, creationDate, title, text, comments }
   return (
     <Page title="Home">
-      {loading && (
-        <Container alignItems="center">
+      {loading ? (
+        <Container align="center">
           <CircularProgress />
         </Container>
+      ) : (
+        <Container maxWidth="xl">
+          <Box sx={{ pb: 5 }} alignItems="center">
+            <Typography variant="h4">{title}</Typography>
+            <i>By {author}</i>
+          </Box>
+          <Box sx={{ pb: 10 }} alignItems="center">
+            <Typography>{text}</Typography>
+          </Box>
+          <Typography variant="h5">Comments:</Typography>
+          <Box sx={{ mt: 2 }} alignItems="center">
+            <ul style={{ listStyleType: 'none' }}>
+              {comments.map((text) => (
+                <li>
+                  <b>{text.author}:</b> &nbsp;
+                  {text.comment}
+                </li>
+              ))}
+            </ul>
+          </Box>
+          <AddComment id={id} />
+        </Container>
       )}
-      <Container maxWidth="xl">
-        <Box sx={{ pb: 5 }} alignItems="center">
-          <Typography variant="h4">{title}</Typography>
-          <i>By {author}</i>
-        </Box>
-        <Box sx={{ pb: 10 }} alignItems="center">
-          <Typography>{text}</Typography>
-        </Box>
-        <Typography variant="h5">Comments:</Typography>
-        <Box sx={{ mt: 2 }} alignItems="center">
-          <ul style={{ listStyleType: 'none' }}>
-            {comments.map((text) => (
-              <li>
-                <b>{text.author}:</b> &nbsp;
-                {text.comment}
-              </li>
-            ))}
-          </ul>
-        </Box>
-        <AddComment id={id} />
-      </Container>
     </Page>
   );
 }

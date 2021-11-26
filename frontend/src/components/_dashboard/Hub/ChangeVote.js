@@ -18,6 +18,7 @@ export default function ChangeVote({ fname, username, topicName, votes }) {
   const [vote, setVote] = useState(parseInt(votes, 10));
 
   const upvote = async () => {
+    setVote(vote + 1);
     const endpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/changeVotes`;
     const mode = 'post';
     const req = {
@@ -27,9 +28,9 @@ export default function ChangeVote({ fname, username, topicName, votes }) {
       votes: vote
     };
     const res = await authware(mode, endpoint, req);
-    setVote(vote + 1);
   };
   const downvote = async () => {
+    setVote(vote - 1);
     const endpoint = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/hub/changeVotes`;
     const mode = 'post';
     const req = {
@@ -39,7 +40,6 @@ export default function ChangeVote({ fname, username, topicName, votes }) {
       votes: vote
     };
     const res = await authware(mode, endpoint, req);
-    setVote(vote - 1);
   };
 
   return (
