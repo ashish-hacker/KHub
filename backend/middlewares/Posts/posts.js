@@ -230,8 +230,9 @@ router.put('/vote/:id', async (req, res) => {
 // Delete a post
 
 router.delete('/delete/:id', async (req, res) => {
+    console.log(req.params.id);
     try {
-        await posts.deleteOne({ id: req.params.id });
+        await posts.deleteOne({ _id: req.params.id });
         res.status(200);
         res.send("Post Deleted");
     } catch (e) {

@@ -252,7 +252,7 @@ export default function Board() {
 
         <Stack mb={5} direction="row" align="center" justifyContent="space-between">
           <SelectBoard />
-          <Button variant="contained" onClick={handleSearch}>
+          <Button variant="outlined" onClick={handleSearch}>
             Search
           </Button>
         </Stack>
@@ -261,7 +261,7 @@ export default function Board() {
           <Container align="center" sx={{ minWidth: 500 }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {!posts ? (
-                <div>Hello!</div>
+                <div />
               ) : (
                 posts.map((row) => (
                   <Grid item xs={2} sm={4} md={4} key={row._id}>

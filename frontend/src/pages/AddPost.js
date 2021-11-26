@@ -147,6 +147,9 @@ export default function AddPost() {
                 <ListSubheader>Computer Science and Engineering</ListSubheader>
                 <MenuItem value="Operating Systems">Operating Systems</MenuItem>
                 <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
+                <MenuItem value="Artificial Intelligence">Artificial Intelligence</MenuItem>
+                <MenuItem value="OOP">OOP</MenuItem>
+                <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
                 <ListSubheader>Mechanical Engineering</ListSubheader>
                 <MenuItem value="S1">Subject 1</MenuItem>
                 <MenuItem value="S2">Subject 2</MenuItem>

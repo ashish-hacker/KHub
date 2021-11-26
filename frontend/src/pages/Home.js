@@ -53,7 +53,7 @@ export default function DashboardApp() {
             <Typography fontSize={18} mt={15}>
               Knowledge-Hub is your all in one destination for resources for your studies. Be it the
               book or the assignment questions. You don't have to worry about them. We have all of
-              them organized in a signle place.
+              them organized in a single place.
             </Typography>
             <img
               style={{ width: 450, height: 400 }}

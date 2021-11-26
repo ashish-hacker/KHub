@@ -7,11 +7,12 @@ require('dotenv').config();
 
 export default function DeletePost({ id }) {
   const handleDelete = (e) => {
+    console.log(id);
     e.preventDefault();
     const t = localStorage.getItem('jwt');
     try {
       const res = axios.delete(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/posts/delete/${id}`);
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.log(err);
     }
