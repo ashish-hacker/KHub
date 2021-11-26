@@ -66,7 +66,7 @@ export default function Register() {
               Get started absolutely free.
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>
-              Free forever. No credit card needed.
+              All in one destination for all your resources.
             </Typography>
           </Box>
 

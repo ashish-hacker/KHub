@@ -18,7 +18,7 @@ export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [auth, setAuth] = useState(0);
-  let isSubmitting = false;
+  const isSubmitting = false;
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Name is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -31,35 +31,18 @@ export default function RegisterForm() {
       password: ''
     },
     validationSchema: RegisterSchema,
-    onSubmit: (values) => {
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/auth/register/student`, {
+    onSubmit: async (values) => {
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/auth/register/student`,
+        {
           name: values.name,
           email: values.email,
           password: values.password
-        })
-        .then((res) => {
-          if (res) {
-            setAuth(res.status);
-          }
-        })
-        .catch((err) => console.log(err));
-      if (auth === 201) {
-        isSubmitting = true;
-        navigate('/login', {
-          replace: true
-        });
-      } else if (auth === 409) {
-        alert('User Already Exists, Login!');
-        navigate('/login', {
-          replace: true
-        });
-      } else if (auth === 400) {
-        alert('All Inputs are required!');
-        navigate('/login', {
-          replace: true
-        });
-      }
+        }
+      );
+      navigate('/login', {
+        replace: true
+      });
     }
   });
 
