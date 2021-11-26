@@ -243,14 +243,14 @@ export default function Board() {
   return (
     <Page title="Forum">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" align="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Forum
           </Typography>
           <Post />
         </Stack>
 
-        <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
+        <Stack mb={5} direction="row" align="center" justifyContent="space-between">
           <SelectBoard />
           <Button variant="contained" onClick={handleSearch}>
             Search

@@ -6,6 +6,7 @@ import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import faker from 'faker';
+import dateFormat from 'dateformat';
 // material
 import {
   Card,
@@ -292,7 +293,9 @@ export default function User() {
                               <DownloadFromTemp filename={filename} />
                             </TableCell>
                             <TableCell align="left">{topic}</TableCell>
-                            <TableCell align="left"> {lastModified} </TableCell>
+                            <TableCell align="left">
+                              {dateFormat(lastModified, 'mmmm dS, yyyy')}
+                            </TableCell>
                             <TableCell align="left">
                               <Approve
                                 filename={filename}
@@ -379,7 +382,9 @@ export default function User() {
                               <DownloadFromMain filename={filename} />
                             </TableCell>
                             <TableCell align="left">{topic}</TableCell>
-                            <TableCell align="left"> {lastModified} </TableCell>
+                            <TableCell align="left">
+                              {dateFormat(lastModified, 'mmmm dS, yyyy')}
+                            </TableCell>
                             <TableCell component="th" scope="row" padding="none">
                               <ChangeVote
                                 username={name}
