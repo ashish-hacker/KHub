@@ -16,6 +16,8 @@ import Select from '@mui/material/Select';
 import { LoadingButton } from '@mui/lab';
 import { Stack } from '@mui/material';
 import axios from 'axios';
+import Branches from '../data/branches';
+import Subjects from '../data/subjects';
 
 require('dotenv').config();
 
@@ -116,19 +118,9 @@ export default function AddPost() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value="Computer Science and Engineering">
-                  Computer Science and Engineering
-                </MenuItem>
-                <MenuItem value="Mechanical Engineering">Mechanical Engineering</MenuItem>
-                <MenuItem value="Electrical Engineering">Electrical Engineering</MenuItem>
-                <MenuItem value="Information Technology">Information Technology</MenuItem>
-                <MenuItem value="Civil Engineering">Civil Engineering</MenuItem>
-                <MenuItem value="Electronics and Communication Engineering">
-                  Electronics and Communication Engineering
-                </MenuItem>
-                <MenuItem value="Electronics and Instrumation">
-                  Electronics and Instrumation
-                </MenuItem>
+                {Branches.map((branch) => (
+                  <MenuItem value={branch}>{branch}</MenuItem>
+                ))}
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -144,30 +136,9 @@ export default function AddPost() {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <ListSubheader>Computer Science and Engineering</ListSubheader>
-                <MenuItem value="Operating Systems">Operating Systems</MenuItem>
-                <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
-                <MenuItem value="Artificial Intelligence">Artificial Intelligence</MenuItem>
-                <MenuItem value="OOP">OOP</MenuItem>
-                <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
-                <ListSubheader>Mechanical Engineering</ListSubheader>
-                <MenuItem value="S1">Subject 1</MenuItem>
-                <MenuItem value="S2">Subject 2</MenuItem>
-                <ListSubheader>Electrical Engineering</ListSubheader>
-                <MenuItem value="S1">Subject 1</MenuItem>
-                <MenuItem value="S2">Subject 2</MenuItem>
-                <ListSubheader>Information Technology</ListSubheader>
-                <MenuItem value="S1">Subject 1</MenuItem>
-                <MenuItem value="S2">Subject 2</MenuItem>
-                <ListSubheader>Civil Engineering</ListSubheader>
-                <MenuItem value="S1">Subject 1</MenuItem>
-                <MenuItem value="S2">Subject 2</MenuItem>
-                <ListSubheader>Electronics and Communication Engineering</ListSubheader>
-                <MenuItem value="S1">Subject 1</MenuItem>
-                <MenuItem value="S2">Subject 2</MenuItem>
-                <ListSubheader>Electronics and Instrumation</ListSubheader>
-                <MenuItem value="S1">Subject 1</MenuItem>
-                <MenuItem value="S2">Subject 2</MenuItem>
+                {Subjects[branchName].map((subject) => (
+                  <MenuItem value={subject}>{subject}</MenuItem>
+                ))}
               </Select>
             </FormControl>
           </Box>
