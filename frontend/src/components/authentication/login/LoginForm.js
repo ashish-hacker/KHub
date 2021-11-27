@@ -25,12 +25,12 @@ require('dotenv').config();
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmit] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required')
   });
-  let isSubmitting = false;
 
   const formik = useFormik({
     initialValues: {
@@ -40,6 +40,7 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
+      setIsSubmit(true);
       axios
         .post(`${process.env.REACT_APP_BACKEND_ENDPOINT}/auth/login/student`, {
           email: values.email,
@@ -52,7 +53,6 @@ export default function LoginForm() {
             localStorage.setItem('email', res.data.email);
             localStorage.setItem('is_admin', res.data.is_admin);
             if (res.status === 200) {
-              isSubmitting = true;
               // console.log(localStorage.getItem('email'));
               navigate('/', {
                 replace: true
