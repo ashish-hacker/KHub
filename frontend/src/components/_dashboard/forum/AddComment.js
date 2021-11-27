@@ -48,7 +48,6 @@ export default function AddPost({ id }) {
       .catch((err) => console.log(err));
     setIsSubmitting(false);
     setOpen(false);
-    window.location.reload();
   };
 
   const handleClickOpen = () => {

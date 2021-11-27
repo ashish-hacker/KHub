@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 // material
 import { styled } from '@mui/material/styles';
 import { Box, Stack, Container, Typography, TextField, LinearProgress } from '@mui/material';
@@ -56,6 +56,14 @@ export default function NewResc(votes) {
   const navigate = useNavigate();
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem('jwt')) {
+      navigate('/login', {
+        replace: true
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.id === 'author') {

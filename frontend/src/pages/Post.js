@@ -1,6 +1,6 @@
 //  react
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // material
 import { Box, Grid, Container, Typography, CircularProgress } from '@mui/material';
 import axios from 'axios';
@@ -18,6 +18,15 @@ export default function Post() {
   const id = location.pathname.split('/')[3];
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem('jwt')) {
+      navigate('/login', {
+        replace: true
+      });
+    }
+  }, []);
 
   useEffect(async () => {
     const res = await axios.get(
@@ -28,7 +37,7 @@ export default function Post() {
     setText(res.data.text);
     setComments(res.data.comments);
     setLoading(false);
-  }, []);
+  }, [comments]);
   // { id , author, creationDate, title, text, comments }
   return (
     <Page title="Home">

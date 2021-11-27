@@ -228,13 +228,18 @@ export default function Board() {
           <Container align="center" sx={{ minWidth: 500 }}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               {!posts ? (
-                <div />
+                <Typography>No Posts Found!</Typography>
               ) : (
                 posts.map((row) => (
                   <Grid item xs={2} sm={4} md={4} key={row._id}>
                     <PostCard row={row} />
                   </Grid>
                 ))
+              )}
+              {posts.length === 0 && !loading && (
+                <Container align="center">
+                  <SearchNotFound searchQuery="Your Query" forum="true" />
+                </Container>
               )}
             </Grid>
           </Container>
@@ -243,38 +248,3 @@ export default function Board() {
     </Page>
   );
 }
-
-// <ListSubheader>Computer Science and Engineering</ListSubheader>
-//               <MenuItem value="Operating Systems">Operating Systems</MenuItem>
-//               <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
-//               <ListSubheader>Mechanical Engineering</ListSubheader>
-//               <MenuItem value={3}>Subject 1</MenuItem>
-//               <MenuItem value={4}>Subject 2</MenuItem>
-//               <ListSubheader>Electrical Engineering</ListSubheader>
-//               <MenuItem value={3}>Subject 1</MenuItem>
-//               <MenuItem value={4}>Subject 2</MenuItem>
-//               <ListSubheader>Information Technology</ListSubheader>
-//               <MenuItem value={3}>Subject 1</MenuItem>
-//               <MenuItem value={4}>Subject 2</MenuItem>
-//               <ListSubheader>Civil Engineering</ListSubheader>
-//               <MenuItem value={3}>Subject 1</MenuItem>
-//               <MenuItem value={4}>Subject 2</MenuItem>
-//               <ListSubheader>Electronics and Communication Engineering</ListSubheader>
-//               <MenuItem value={3}>Subject 1</MenuItem>
-//               <MenuItem value={4}>Subject 2</MenuItem>
-//               <ListSubheader>Electronics and Instrumation</ListSubheader>
-//               <MenuItem value={3}>Subject 1</MenuItem>
-//               <MenuItem value={4}>Subject 2</MenuItem>
-/*
-< MenuItem value = "Computer Science and Engineering" >
-  Computer Science and Engineering <
-  /MenuItem> <
-  MenuItem value = "Mechanical Engineering" > Mechanical Engineering < /MenuItem> <
-  MenuItem value = "Electrical Engineering" > Electrical Engineering < /MenuItem> <
-  MenuItem value = "Information Technology" > Information Technology < /MenuItem> <
-  MenuItem value = "Civil Engineering" > Civil Engineering < /MenuItem> <
-  MenuItem value = "Electronics and Communication Engineering" >
-  Electronics and Communication Engineering <
-  /MenuItem> <
-  MenuItem value = "Electronics and Instrumation" > Electronics and Instrumation < /MenuItem>
-*/
