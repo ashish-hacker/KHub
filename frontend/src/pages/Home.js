@@ -6,7 +6,7 @@ import { Box, Grid, Container, Typography, Stack } from '@mui/material';
 import axios from 'axios';
 // components
 import Page from '../components/Page';
-import account from '../_mocks_/account';
+import account from '../data/account';
 
 require('dotenv').config();
 // ----------------------------------------------------------------------

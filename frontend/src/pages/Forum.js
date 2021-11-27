@@ -38,19 +38,13 @@ import SearchNotFound from '../components/SearchNotFound';
 import getPosts from '../components/_dashboard/forum/getPosts';
 import searchPosts from '../components/_dashboard/forum/searchPost';
 import Post from './AddPost';
+import Branches from '../data/branches';
+import Subjects from '../data/subjects';
 // import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../components/_dashboard/forum';
 //
 // import POSTS from '../_mocks_/blog';
 require('dotenv').config();
 // ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-  { id: 'name', label: 'Author', alignRight: false },
-  { id: 'Title', label: 'Title', alignRight: false },
-  { id: 'Related Subject', label: 'Subject', alignRight: false },
-  { id: 'Upload Date', label: 'Uploaded on', alignRight: false },
-  { id: 'Votes', label: 'Votes', alignRight: false }
-];
 // ----------------------------------------------------------------------
 Vote.propTypes = {
   votes: PropTypes.number,
@@ -180,17 +174,9 @@ export default function Board() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value="Computer Science and Engineering">
-                Computer Science and Engineering
-              </MenuItem>
-              <MenuItem value="Mechanical Engineering">Mechanical Engineering</MenuItem>
-              <MenuItem value="Electrical Engineering">Electrical Engineering</MenuItem>
-              <MenuItem value="Information Technology">Information Technology</MenuItem>
-              <MenuItem value="Civil Engineering">Civil Engineering</MenuItem>
-              <MenuItem value="Electronics and Communication Engineering">
-                Electronics and Communication Engineering
-              </MenuItem>
-              <MenuItem value="Electronics and Instrumation">Electronics and Instrumation</MenuItem>
+              {Branches.map((branch) => (
+                <MenuItem value={branch}>{branch}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -206,27 +192,9 @@ export default function Board() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <ListSubheader>Computer Science and Engineering</ListSubheader>
-              <MenuItem value="Operating Systems">Operating Systems</MenuItem>
-              <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
-              <ListSubheader>Mechanical Engineering</ListSubheader>
-              <MenuItem value={3}>Subject 1</MenuItem>
-              <MenuItem value={4}>Subject 2</MenuItem>
-              <ListSubheader>Electrical Engineering</ListSubheader>
-              <MenuItem value={3}>Subject 1</MenuItem>
-              <MenuItem value={4}>Subject 2</MenuItem>
-              <ListSubheader>Information Technology</ListSubheader>
-              <MenuItem value={3}>Subject 1</MenuItem>
-              <MenuItem value={4}>Subject 2</MenuItem>
-              <ListSubheader>Civil Engineering</ListSubheader>
-              <MenuItem value={3}>Subject 1</MenuItem>
-              <MenuItem value={4}>Subject 2</MenuItem>
-              <ListSubheader>Electronics and Communication Engineering</ListSubheader>
-              <MenuItem value={3}>Subject 1</MenuItem>
-              <MenuItem value={4}>Subject 2</MenuItem>
-              <ListSubheader>Electronics and Instrumation</ListSubheader>
-              <MenuItem value={3}>Subject 1</MenuItem>
-              <MenuItem value={4}>Subject 2</MenuItem>
+              {Subjects[branch].map((subject) => (
+                <MenuItem value={subject}>{subject}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>
@@ -276,3 +244,38 @@ export default function Board() {
     </Page>
   );
 }
+
+// <ListSubheader>Computer Science and Engineering</ListSubheader>
+//               <MenuItem value="Operating Systems">Operating Systems</MenuItem>
+//               <MenuItem value="Advanced Algorithms">Advanced Algorithms</MenuItem>
+//               <ListSubheader>Mechanical Engineering</ListSubheader>
+//               <MenuItem value={3}>Subject 1</MenuItem>
+//               <MenuItem value={4}>Subject 2</MenuItem>
+//               <ListSubheader>Electrical Engineering</ListSubheader>
+//               <MenuItem value={3}>Subject 1</MenuItem>
+//               <MenuItem value={4}>Subject 2</MenuItem>
+//               <ListSubheader>Information Technology</ListSubheader>
+//               <MenuItem value={3}>Subject 1</MenuItem>
+//               <MenuItem value={4}>Subject 2</MenuItem>
+//               <ListSubheader>Civil Engineering</ListSubheader>
+//               <MenuItem value={3}>Subject 1</MenuItem>
+//               <MenuItem value={4}>Subject 2</MenuItem>
+//               <ListSubheader>Electronics and Communication Engineering</ListSubheader>
+//               <MenuItem value={3}>Subject 1</MenuItem>
+//               <MenuItem value={4}>Subject 2</MenuItem>
+//               <ListSubheader>Electronics and Instrumation</ListSubheader>
+//               <MenuItem value={3}>Subject 1</MenuItem>
+//               <MenuItem value={4}>Subject 2</MenuItem>
+/*
+< MenuItem value = "Computer Science and Engineering" >
+  Computer Science and Engineering <
+  /MenuItem> <
+  MenuItem value = "Mechanical Engineering" > Mechanical Engineering < /MenuItem> <
+  MenuItem value = "Electrical Engineering" > Electrical Engineering < /MenuItem> <
+  MenuItem value = "Information Technology" > Information Technology < /MenuItem> <
+  MenuItem value = "Civil Engineering" > Civil Engineering < /MenuItem> <
+  MenuItem value = "Electronics and Communication Engineering" >
+  Electronics and Communication Engineering <
+  /MenuItem> <
+  MenuItem value = "Electronics and Instrumation" > Electronics and Instrumation < /MenuItem>
+*/

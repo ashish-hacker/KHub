@@ -26,7 +26,7 @@ import {
 } from '@mui/material';
 // components
 import { fi } from 'date-fns/locale';
-import getList from '../_mocks_/user';
+import getList from '../data/user';
 import httpReq from '../authware';
 import Page from '../components/Page';
 import Label from '../components/Label';
