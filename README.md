@@ -130,8 +130,11 @@ npm run server
 - Only Teachers can delete uploaded Posts and Files
 - Register and SignIn
 
-## Documentation
+## API Reference
 [API reference](https://github.com/ashish-hacker/KHub/blob/main/backend/README.md)
+
+
+## Documentation
 
 In KHub , we bring students and teachers together. Teachers ensure that the right resources and information reach the students.
 - Whenever a student uploads a file, before reaching to other students, It have to be approved by any of the teacher. 
