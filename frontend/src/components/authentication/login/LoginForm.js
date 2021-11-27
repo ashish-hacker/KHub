@@ -54,24 +54,24 @@ export default function LoginForm() {
             localStorage.setItem('is_admin', res.data.is_admin);
             if (res.status === 200) {
               // console.log(localStorage.getItem('email'));
+              localStorage.setItem('jwt', res.data.token);
+              localStorage.setItem('email', res.data.email);
+              localStorage.setItem('is_admin', res.data.is_admin);
               navigate('/', {
                 replace: true
               });
               window.location.reload();
-            } else if (res.status === 409) {
-              alert('Invalid Credentials!!');
-              navigate('/login', {
-                replace: true
-              });
-            } else if (res.status === 400) {
-              alert('All Inputs are required!');
-              navigate('/login', {
-                replace: true
-              });
+            } else {
+              setIsSubmit(false);
+              alert('Invalid Credentials!');
             }
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsSubmit(false);
+          alert('Invalid Credentials!');
+          console.log(err);
+        });
     }
   });
 
