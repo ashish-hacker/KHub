@@ -6,7 +6,6 @@ require('dotenv').config();
 const getList = async () => {
   const res = await axios.get(`${process.env.REACT_APP_BACKEND_ENDPOINT}/api/posts`);
   // console.log(typeof res.data[0].creationDate);
-  console.log(res.data);
   return res.data;
 };
 

@@ -202,7 +202,6 @@ export default function Board() {
     );
   }
   const handleSearch = async () => {
-    console.log(year, branch, subject);
     const res = await searchPosts(branch, year, subject);
     setPosts(res);
     setLoading(false);
