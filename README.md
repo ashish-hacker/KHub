@@ -15,15 +15,15 @@ Knowledge-Hub is your all in one destination for resources for your studies. Be 
 
 ## Table Of Contents
 
-- [Motivation]()
-- [Tech Stack]()
+- [Motivation](https://github.com/ashish-hacker/KHub#motivation)
+- [Tech Stack](https://github.com/ashish-hacker/KHub#tech-stack)
 - [Installation](https://github.com/ashish-hacker/KHub#installation)
-- [Run locally]()
-- [Environment Variables]()
+- [Run locally](https://github.com/ashish-hacker/KHub#run-locally)
+- [Environment Variables](https://github.com/ashish-hacker/KHub#environment-variables)
 - [Features](https://github.com/ashish-hacker/KHub#features)
 - [Documentation](https://github.com/ashish-hacker/KHub#documentation)
-- [Demo]()
-- [Deployment]()
+- [Demo](https://github.com/ashish-hacker/KHub#demo)
+- [Deployment](https://github.com/ashish-hacker/KHub#deployment)
 - [Lessons Learnt]()
 - [Future Scopes]()
 - [Roadmap]()
@@ -145,7 +145,50 @@ In KHub , we bring students and teachers together. Teachers ensure that the righ
 
 ## Demo
 
+- Signin
+![Sign In](https://user-images.githubusercontent.com/54330052/143690123-95d180aa-68da-4475-8392-68f4f99ff1a6.png)
+
+- Register
+![Register](https://user-images.githubusercontent.com/54330052/143690398-5b07dda8-4c52-49e6-b47d-f1275dc4a9c0.png)
+
+- Homepage
+![Homepage](https://user-images.githubusercontent.com/54330052/143690153-7d66f138-fbe9-49c5-b581-ca0001829817.png)
+
+- Hub
+![Screenshot (59)](https://user-images.githubusercontent.com/54330052/143690175-08bf992e-92fc-4a59-aa9f-d75600945487.png)
+
+- Add New File to Hub
+![Screenshot (62)](https://user-images.githubusercontent.com/54330052/143690183-11e5cfb3-8c3d-46b9-9d72-db75a57bef98.png)
+
+- Forum 
+![Screenshot (64)](https://user-images.githubusercontent.com/54330052/143690201-5bdd633f-f19b-44d2-90d2-99b8670f470f.png)
+
+- Search in Forum
+![Screenshot (65)](https://user-images.githubusercontent.com/54330052/143690227-07fb6820-abe5-4824-b717-0c3930137465.png)
+
+- Add New Post in Forum
+![Screenshot (66)](https://user-images.githubusercontent.com/54330052/143690253-dda4498e-21bc-4968-8d1e-4aeb32a3b75b.png)
+
+- Post Page
+![Screenshot (68)](https://user-images.githubusercontent.com/54330052/143690712-a1e9bb3c-899c-44b6-bff1-cf3004e13fdb.png)
+
+- Add Comment on Post
+![Screenshot (73)](https://user-images.githubusercontent.com/54330052/143690511-cb3de9ab-f8df-4dfd-a242-3ebf7c5be075.png)
+
+- Approve or DisApprove files uploaded by students
+![Screenshot (63)](https://user-images.githubusercontent.com/54330052/143690410-54f9827b-c666-4066-b64f-40b67de46786.png)
+
+- Log Out
+![Screenshot (69)](https://user-images.githubusercontent.com/54330052/143690273-ed375a46-7a75-4eea-b9c5-8161a57e8628.png)
+
+- Page Not Found
+![Screenshot (72)](https://user-images.githubusercontent.com/54330052/143690292-28f02830-72db-4351-8388-b61b2d6b5ccd.png)
+
+
+
 ## Deployment
 
 Both Client side and Server side are deployed separately, so that changes in Client side won't affect the Server and vice versa.
 Both are deployed on *heroku* platform.
+
+Frontend is deployed [here](https://k-hub.herokuapp.com/). Backend is deployed [here](https://khub-service.herokuapp.com/).

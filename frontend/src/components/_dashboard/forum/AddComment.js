@@ -65,7 +65,7 @@ export default function AddPost({ id }) {
     <div>
       <Button onClick={handleClickOpen}>Add Comment</Button>
       <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-        <DialogTitle>Fill Post Details</DialogTitle>
+        <DialogTitle>Add Comment</DialogTitle>
         <DialogContent>
           <Box
             component="form"
