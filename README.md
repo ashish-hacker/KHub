@@ -195,3 +195,8 @@ Both Client side and Server side are deployed separately, so that changes in Cli
 Both are deployed on *heroku* platform.
 
 Frontend is deployed [here](https://k-hub.herokuapp.com/). Backend is deployed [here](https://khub-service.herokuapp.com/).
+
+## Github Project
+
+You can find the project here on [Github Project](https://github.com/users/ashish-hacker/projects/3).
+The presentation [file](https://docs.google.com/presentation/d/1gSX1lgPA0r9IcwMo59rx9_heAZlz8l904aXOr7_-Pjk/edit?usp=sharing);
