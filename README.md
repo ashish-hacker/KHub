@@ -21,6 +21,7 @@ Knowledge-Hub is your all in one destination for resources for your studies. Be 
 - [Run locally](https://github.com/ashish-hacker/KHub#run-locally)
 - [Environment Variables](https://github.com/ashish-hacker/KHub#environment-variables)
 - [Features](https://github.com/ashish-hacker/KHub#features)
+- [API Reference](https://github.com/ashish-hacker/KHub#api-reference)
 - [Documentation](https://github.com/ashish-hacker/KHub#documentation)
 - [Demo](https://github.com/ashish-hacker/KHub#demo)
 - [Deployment](https://github.com/ashish-hacker/KHub#deployment)
