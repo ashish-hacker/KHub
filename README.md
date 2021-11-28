@@ -24,10 +24,7 @@ Knowledge-Hub is your all in one destination for resources for your studies. Be 
 - [Documentation](https://github.com/ashish-hacker/KHub#documentation)
 - [Demo](https://github.com/ashish-hacker/KHub#demo)
 - [Deployment](https://github.com/ashish-hacker/KHub#deployment)
-- [Lessons Learnt]()
-- [Future Scopes]()
-- [Roadmap]()
-- [Author]()
+
 
 ## Motivation
 In this era of information there is no shortage of informations and resources. Especially student communities are always in need of correct information and resources whenever they need. So that they can learn new things in a hassle-free manner. 

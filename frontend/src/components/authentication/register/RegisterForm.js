@@ -18,7 +18,7 @@ export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [auth, setAuth] = useState(0);
-  const isSubmitting = false;
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const RegisterSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Name is required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -32,6 +32,7 @@ export default function RegisterForm() {
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values) => {
+      setIsSubmitting(true);
       const res = await axios.post(
         `${process.env.REACT_APP_BACKEND_ENDPOINT}/auth/register/student`,
         {
@@ -40,6 +41,7 @@ export default function RegisterForm() {
           password: values.password
         }
       );
+      setIsSubmitting(false);
       navigate('/login', {
         replace: true
       });
