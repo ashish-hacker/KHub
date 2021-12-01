@@ -197,3 +197,12 @@ Frontend is deployed [here](https://k-hub.herokuapp.com/). Backend is deployed [
 ## Github Project
 
 You can find the project here on [Github Project](https://github.com/users/ashish-hacker/projects/3).
+
+### Sample Credentials
+
+**Teacher**:  *Email*: ashish@khubb.com
+              *Password*: abc@1234
+
+**Student**: *Email*: pratyush@abc.com
+             *Password*: abc@111
+
