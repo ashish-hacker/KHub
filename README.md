@@ -25,7 +25,7 @@ Knowledge-Hub is your all in one destination for resources for your studies. Be 
 - [Documentation](https://github.com/ashish-hacker/KHub#documentation)
 - [Demo](https://github.com/ashish-hacker/KHub#demo)
 - [Deployment](https://github.com/ashish-hacker/KHub#deployment)
-- [Sample Credentials](https://github.com/ashish-hacker/KHub/blob/main/README.md#sample-credentials)
+- [Sample Credentials](https://github.com/ashish-hacker/KHub#sample-credentials)
 
 
 ## Motivation
